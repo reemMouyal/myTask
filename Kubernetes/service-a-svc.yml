@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    namespace: s1-ns
+    labels:
+        app: service-a
+    name: service-a-svc
+spec:
+    ports:
+    - port: 3000
+      protocol: TCP
+      targetPort: 3000
+    selector:
+        app: service-a
+    type: ClusterIP

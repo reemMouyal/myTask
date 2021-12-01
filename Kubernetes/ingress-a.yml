@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    namespace: s1-ns
+    name: ingress-a
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+    ingressClassName: nginx
+    rules:
+    - http:
+        paths:
+        - path: /service-a
+          pathType: Prefix
+          backend:
+            service:   
+              name: service-a-svc 
+              port:
+                number: 3000   

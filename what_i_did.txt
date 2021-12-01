@@ -1,0 +1,239 @@
+1.subscribe to azure
+2.install Azure CLI on windows.
+3.install Scoop -Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+4.Install the aks-engine using scoop -scoop install aks-engine
+5.az login-login with browser.
+result:
+[
+  {
+    "cloudName": "AzureCloud",
+    "homeTenantId": "5#####_######_######_######",
+    "id": "####_######_######_######",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "Azure subscription 1",
+    "state": "Enabled",
+    "tenantId": "5968bebb-1f2b-4010-8037-321ba6474dbf",
+    "user": {
+      "name": "reem1985@gmail.com",
+      "type": "user"
+    }
+  }
+]
+# Using guide: https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough
+7.az group create --name reem-aks-group  --location eastus
+{
+  "id": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourceGroups/reem-aks-group",
+  "location": "eastus",
+  "managedBy": null,
+  "name": "reem-aks-group",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}
+
+create cluster with (rbac is default):
+result:
+ az aks create --resource-group reem-aks-group --name reemAKSCluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
+AAD role propagation done[############################################]  100.0000%{
+  "aadProfile": null,
+  "addonProfiles": {
+    "omsagent": {
+      "config": {
+        "logAnalyticsWorkspaceResourceID": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-7ae0d07a-2044-47ce-8852-0da695dfce92-eus"
+      },
+      "enabled": true,
+      "identity": {
+        "clientId": "31ddb8a2-f987-4963-818d-b68ca5a0c9ee",
+        "objectId": "6de83aa6-d2c8-48fb-b67c-7d824f675c44",
+        "resourceId": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourcegroups/MC_reem-aks-group_reemAKSCluster_eastus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/omsagent-reemakscluster"
+      }
+    }
+  },
+  "agentPoolProfiles": [
+    {
+      "availabilityZones": null,
+      "count": 1,
+      "enableAutoScaling": false,
+      "enableEncryptionAtHost": false,
+      "enableFips": false,
+      "enableNodePublicIp": false,
+      "enableUltraSsd": false,
+      "gpuInstanceProfile": null,
+      "kubeletConfig": null,
+      "kubeletDiskType": "OS",
+      "linuxOsConfig": null,
+      "maxCount": null,
+      "maxPods": 110,
+      "minCount": null,
+      "mode": "System",
+      "name": "nodepool1",
+      "nodeImageVersion": "AKSUbuntu-1804gen2containerd-2021.11.06",
+      "nodeLabels": null,
+      "nodePublicIpPrefixId": null,
+      "nodeTaints": null,
+      "orchestratorVersion": "1.20.9",
+      "osDiskSizeGb": 128,
+      "osDiskType": "Managed",
+      "osSku": "Ubuntu",
+      "osType": "Linux",
+      "podSubnetId": null,
+      "powerState": {
+        "code": "Running"
+      },
+      "provisioningState": "Succeeded",
+      "proximityPlacementGroupId": null,
+      "scaleDownMode": null,
+      "scaleSetEvictionPolicy": null,
+      "scaleSetPriority": null,
+      "spotMaxPrice": null,
+      "tags": null,
+      "type": "VirtualMachineScaleSets",
+      "upgradeSettings": null,
+      "vmSize": "Standard_DS2_v2",
+      "vnetSubnetId": null
+    }
+  ],
+  "apiServerAccessProfile": null,
+  "autoScalerProfile": null,
+  "autoUpgradeProfile": null,
+  "azurePortalFqdn": "reemaksclu-reem-aks-group-7ae0d0-9b6e0d00.portal.hcp.eastus.azmk8s.io",
+  "disableLocalAccounts": false,
+  "diskEncryptionSetId": null,
+  "dnsPrefix": "reemAKSClu-reem-aks-group-7ae0d0",
+  "enablePodSecurityPolicy": null,
+  "enableRbac": true,
+  "extendedLocation": null,
+  "fqdn": "reemaksclu-reem-aks-group-7ae0d0-9b6e0d00.hcp.eastus.azmk8s.io",
+  "fqdnSubdomain": null,
+  "httpProxyConfig": null,
+  "id": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourcegroups/reem-aks-group/providers/Microsoft.ContainerService/managedClusters/reemAKSCluster",
+  "identity": {
+    "principalId": "422c59e4-f786-404f-b042-e12543f44e5f",
+    "tenantId": "5968bebb-1f2b-4010-8037-321ba6474dbf",
+    "type": "SystemAssigned",
+    "userAssignedIdentities": null
+  },
+  "identityProfile": {
+    "kubeletidentity": {
+      "clientId": "fde60302-d496-4580-9fc3-25fef628628a",
+      "objectId": "9ab0a891-62c5-4af5-a1fc-546ad9d0e27c",
+      "resourceId": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourcegroups/MC_reem-aks-group_reemAKSCluster_eastus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/reemAKSCluster-agentpool"
+    }
+  },
+  "kubernetesVersion": "1.20.9",
+  "linuxProfile": {
+    "adminUsername": "azureuser",
+    "ssh": {
+      "publicKeys": [
+        {
+          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3n2elMOFggGZvievIgtwV0K2SEcM1YCpcTGAT1MT5dx/AFSEuaGEBay/WwwH6SuyMpgKJn7oJxLIpez7N4HN1Z4pi/d11h5kGA/DhIP1Nwq0xoAaMWMspCgOdGOOKl65QLu0pfd9AUMkO1njUnKbfRgjoGCrLRgXJyAoMmR29nhi7kJjHaO6MGxI5+W7bOZrrk24rQPttb7VVa4OOUCPdOVRWcS/oUh8IfzlX02bmlbmcPBKqEIB2+yPdrdLf8N4ZVAWP+qiJl1aOgClAoW4Snvu8au5o7a9oKO2k8m+NmigXyQfzL6PzL5PP5GQgnrxHCRF/oBUcKbYuKLUgjmbT"
+        }
+      ]
+    }
+  },
+  "location": "eastus",
+  "maxAgentPools": 100,
+  "name": "reemAKSCluster",
+  "networkProfile": {
+    "dnsServiceIp": "10.0.0.10",
+    "dockerBridgeCidr": "172.17.0.1/16",
+    "loadBalancerProfile": {
+      "allocatedOutboundPorts": null,
+      "effectiveOutboundIPs": [
+        {
+          "id": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourceGroups/MC_reem-aks-group_reemAKSCluster_eastus/providers/Microsoft.Network/publicIPAddresses/41b64a75-85a3-4da7-9b25-79631b69e3ca",
+          "resourceGroup": "MC_reem-aks-group_reemAKSCluster_eastus"
+        }
+      ],
+      "idleTimeoutInMinutes": null,
+      "managedOutboundIPs": {
+        "count": 1
+      },
+      "outboundIPs": null,
+      "outboundIpPrefixes": null
+    },
+    "loadBalancerSku": "Standard",
+    "natGatewayProfile": null,
+    "networkMode": null,
+    "networkPlugin": "kubenet",
+    "networkPolicy": null,
+    "outboundType": "loadBalancer",
+    "podCidr": "10.244.0.0/16",
+    "serviceCidr": "10.0.0.0/16"
+  },
+  "nodeResourceGroup": "MC_reem-aks-group_reemAKSCluster_eastus",
+  "podIdentityProfile": null,
+  "powerState": {
+    "code": "Running"
+  },
+  "privateFqdn": null,
+  "privateLinkResources": null,
+  "provisioningState": "Succeeded",
+  "resourceGroup": "reem-aks-group",
+  "securityProfile": null,
+  "servicePrincipalProfile": {
+    "clientId": "msi",
+    "secret": null
+  },
+  "sku": {
+    "name": "Basic",
+    "tier": "Free"
+  },
+  "tags": null,
+  "type": "Microsoft.ContainerService/ManagedClusters",
+  "windowsProfile": null
+}
+
+8.az aks install-cli
+
+9.get credentials:
+az configure --defaults group=reem-aks-group
+az aks get-credentials --name reemAKSCluster
+
+10.verifay contexet:
+kubectl config current-context
+reemAKSCluster
+kubectl get nodes
+result:
+NAME                                STATUS   ROLES   AGE   VERSION
+aks-nodepool1-91768504-vmss000000   Ready    agent   67s   v1.21.2
+
+12.deploy deployment and services to cluster:
+#source: https://www.magalix.com/blog/deploying-an-application-on-kubernetes-from-a-to-z
+
+C:\reem\myTask\k8s>kubectl apply -f deployment-service-a.yml
+namespace/s1-ns created
+deployment.apps/service-a created
+
+C:\reem\myTask\k8s>kubectl apply -f deployment-service-b.yml 
+namespace/s2-ns created
+deployment.apps/service-b created
+
+C:\reem\myTask\k8s>kubectl apply -f service-a-svc.yml       
+service/service-a-svc created
+
+C:\reem\myTask\k8s>kubectl apply -f service-b-svc.yml   
+service/service-b-svc created
+
+
+install ingress:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+
+C:\reem\myTask\k8s>kubectl apply -f ingress-a.yml    
+ingress.networking.k8s.io/ingress-a created
+
+C:\reem\myTask\k8s>kubectl apply -f ingress-b.yml     
+ingress.networking.k8s.io/ingress-b created
+
+#source of file:https://github.com/ahmetb/kubernetes-network-policy-recipes/blob/master/04-deny-traffic-from-other-namespaces.md
+
+C:\reem\myTask\k8s>kubectl apply -f deny-from-other-namespaces.yml
+networkpolicy.networking.k8s.io/deny-from-other-namespaces created
+
+
+enter on web browser: http://20.102.36.173/service-a
+http://20.102.36.173/service-b
