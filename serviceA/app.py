@@ -35,9 +35,14 @@ def getAVGCoinRete():
 
 @app.route("/")
 def index():
+ try:
     return render_template("index.html",AVG_Rate = getAVGCoinRete(),rateNow=getBitInDolar(),coin ="Dollar")
+ except Exception as e:
+    print(e)  
+    html = "<h3>An error occurred while connecting to the server. Please contact your service provider </h3>" 
+    return html
 
 
 if __name__ == "__main__": 
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True,host='0.0.0.0',port=port)
+    app.run(debug=False,host='0.0.0.0',port=port)
