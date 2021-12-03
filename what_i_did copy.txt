@@ -1,0 +1,116 @@
+1.subscribe to azure
+2.install Azure CLI on windows.
+3.install Scoop -Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+4.Install the aks-engine using scoop -scoop install aks-engine
+5.az login-login with browser.
+result:
+[
+  {
+    "cloudName": "AzureCloud",
+    "homeTenantId": "5#####_######_######_######",
+    "id": "####_######_######_######",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "Azure subscription 1",
+    "state": "Enabled",
+    "tenantId": "5968bebb-1f2b-4010-8037-321ba6474dbf",
+    "user": {
+      "name": "reem1985@gmail.com",
+      "type": "user"
+    }
+  }
+]
+# Using guide: https://github.com/Azure/aks-engine/blob/master/docs/tutorials/quickstart.md
+7.az group create --name reem-aks-group  --location eastus
+{
+  "id": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourceGroups/reem-aks-group",
+  "location": "eastus",
+  "managedBy": null,
+  "name": "reem-aks-group",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}
+
+8.az ad sp create-for-rbac --role="owner" --scopes="/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourceGroups/reem-aks-group"
+Creating 'owner' role assignment under scope '/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourceGroups/reem-aks-group'
+The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials into your source control. For more information, see https://aka.ms/azadsp-cli
+'name' property in the output is deprecated and will be removed in the future. Use 'appId' instead.
+{
+  "appId": "e889f306-fce1-4797-a6dc-fbfecddf8e24",
+  "displayName": "azure-cli-2021-12-02-19-57-34",
+  "name": "e889f306-fce1-4797-a6dc-fbfecddf8e24",
+  "password": "0bPe4yZH..8aTSpoZPwxlMrmW_hoqtxGIf",
+  "tenant": "5968bebb-1f2b-4010-8037-321ba6474dbf"
+}
+
+
+9.create cluster  using aks-engine
+ ks-engine deploy --subscription-id 7ae0d07a-2044-47ce-8852-0da695dfce92 --resource-group reem-aks-group --location eastus  --api-model kubernetes.json
+ result:
+WARN[0037] Running only 1 control plane VM not recommended for production clusters, use 3 or 5 for control plane redundancy 
+WARN[0037] linuxProfile.enableUnattendedUpgrades configuration was not declared, your cluster nodes will be configured to run unattended-upgrade by default 
+INFO[0047] Starting ARM Deployment reem-aks-group-1932217656 in resource group reem-aks-group. This will take some time... 
+INFO[0462] Finished ARM Deployment (reem-aks-group-1932217656). Succeeded 
+
+
+ $Env:KUBECONFIG=("kubeconfig.eastus.json")
+PS C:\reem\myTask\Kubernetes\_output\reem-aks-group2\kubeconfig> kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://reem-aks-group2.eastus.cloudapp.azure.com
+  name: reem-aks-group2
+contexts:
+- context:
+    cluster: reem-aks-group2
+    user: reem-aks-group2-admin
+  name: reem-aks-group2
+current-context: reem-aks-group2
+kind: Config
+preferences: {}
+users:
+- name: reem-aks-group2-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+
+
+
+12.deploy deployment and services to cluster:
+#source: https://www.magalix.com/blog/deploying-an-application-on-kubernetes-from-a-to-z
+
+ C:\reem\myTask\Kubernetes> kubectl apply -f .\deployment-service-a.yml
+namespace/s1-ns created
+deployment.apps/service-a created
+ C:\reem\myTask\Kubernetes> kubectl apply -f .\deployment-service-b.yml
+namespace/s2-ns created
+deployment.apps/service-b created
+
+C:\reem\myTask\Kubernetes> kubectl apply -f .\service-a-svc.yml
+service/service-a-svc created
+C:\reem\myTask\Kubernetes> kubectl apply -f .\service-b-svc.yml
+service/service-b-svc created
+
+
+install ingress:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+
+C:\reem\myTask\k8s>kubectl apply -f ingress-a.yml    
+ingress.networking.k8s.io/ingress-a created
+
+C:\reem\myTask\k8s>kubectl apply -f ingress-b.yml     
+ingress.networking.k8s.io/ingress-b created
+
+#source of file:https://github.com/ahmetb/kubernetes-network-policy-recipes/blob/master/04-deny-traffic-from-other-namespaces.md
+
+C:\reem\myTask\k8s>kubectl apply -f deny-from-other-namespaces.yml
+networkpolicy.networking.k8s.io/deny-from-other-namespaces created
+
+
+enter on web browser: http://20.102.36.173/service-a
+http://20.102.36.173/service-b
