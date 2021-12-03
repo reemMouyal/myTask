@@ -20,7 +20,7 @@ result:
     }
   }
 ]
-# Using guide: https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough
+# Using guide: https://github.com/Azure/aks-engine/blob/master/docs/tutorials/quickstart.md
 7.az group create --name reem-aks-group  --location eastus
 {
   "id": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourceGroups/reem-aks-group",
@@ -34,188 +34,74 @@ result:
   "type": "Microsoft.Resources/resourceGroups"
 }
 
-create cluster with (rbac is default):
-result:
- az aks create --resource-group reem-aks-group --name reemAKSCluster --node-count 1 --enable-addons monitoring --generate-ssh-keys
-AAD role propagation done[############################################]  100.0000%{
-  "aadProfile": null,
-  "addonProfiles": {
-    "omsagent": {
-      "config": {
-        "logAnalyticsWorkspaceResourceID": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-7ae0d07a-2044-47ce-8852-0da695dfce92-eus"
-      },
-      "enabled": true,
-      "identity": {
-        "clientId": "31ddb8a2-f987-4963-818d-b68ca5a0c9ee",
-        "objectId": "6de83aa6-d2c8-48fb-b67c-7d824f675c44",
-        "resourceId": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourcegroups/MC_reem-aks-group_reemAKSCluster_eastus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/omsagent-reemakscluster"
-      }
-    }
-  },
-  "agentPoolProfiles": [
-    {
-      "availabilityZones": null,
-      "count": 1,
-      "enableAutoScaling": false,
-      "enableEncryptionAtHost": false,
-      "enableFips": false,
-      "enableNodePublicIp": false,
-      "enableUltraSsd": false,
-      "gpuInstanceProfile": null,
-      "kubeletConfig": null,
-      "kubeletDiskType": "OS",
-      "linuxOsConfig": null,
-      "maxCount": null,
-      "maxPods": 110,
-      "minCount": null,
-      "mode": "System",
-      "name": "nodepool1",
-      "nodeImageVersion": "AKSUbuntu-1804gen2containerd-2021.11.06",
-      "nodeLabels": null,
-      "nodePublicIpPrefixId": null,
-      "nodeTaints": null,
-      "orchestratorVersion": "1.20.9",
-      "osDiskSizeGb": 128,
-      "osDiskType": "Managed",
-      "osSku": "Ubuntu",
-      "osType": "Linux",
-      "podSubnetId": null,
-      "powerState": {
-        "code": "Running"
-      },
-      "provisioningState": "Succeeded",
-      "proximityPlacementGroupId": null,
-      "scaleDownMode": null,
-      "scaleSetEvictionPolicy": null,
-      "scaleSetPriority": null,
-      "spotMaxPrice": null,
-      "tags": null,
-      "type": "VirtualMachineScaleSets",
-      "upgradeSettings": null,
-      "vmSize": "Standard_DS2_v2",
-      "vnetSubnetId": null
-    }
-  ],
-  "apiServerAccessProfile": null,
-  "autoScalerProfile": null,
-  "autoUpgradeProfile": null,
-  "azurePortalFqdn": "reemaksclu-reem-aks-group-7ae0d0-9b6e0d00.portal.hcp.eastus.azmk8s.io",
-  "disableLocalAccounts": false,
-  "diskEncryptionSetId": null,
-  "dnsPrefix": "reemAKSClu-reem-aks-group-7ae0d0",
-  "enablePodSecurityPolicy": null,
-  "enableRbac": true,
-  "extendedLocation": null,
-  "fqdn": "reemaksclu-reem-aks-group-7ae0d0-9b6e0d00.hcp.eastus.azmk8s.io",
-  "fqdnSubdomain": null,
-  "httpProxyConfig": null,
-  "id": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourcegroups/reem-aks-group/providers/Microsoft.ContainerService/managedClusters/reemAKSCluster",
-  "identity": {
-    "principalId": "422c59e4-f786-404f-b042-e12543f44e5f",
-    "tenantId": "5968bebb-1f2b-4010-8037-321ba6474dbf",
-    "type": "SystemAssigned",
-    "userAssignedIdentities": null
-  },
-  "identityProfile": {
-    "kubeletidentity": {
-      "clientId": "fde60302-d496-4580-9fc3-25fef628628a",
-      "objectId": "9ab0a891-62c5-4af5-a1fc-546ad9d0e27c",
-      "resourceId": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourcegroups/MC_reem-aks-group_reemAKSCluster_eastus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/reemAKSCluster-agentpool"
-    }
-  },
-  "kubernetesVersion": "1.20.9",
-  "linuxProfile": {
-    "adminUsername": "azureuser",
-    "ssh": {
-      "publicKeys": [
-        {
-          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3n2elMOFggGZvievIgtwV0K2SEcM1YCpcTGAT1MT5dx/AFSEuaGEBay/WwwH6SuyMpgKJn7oJxLIpez7N4HN1Z4pi/d11h5kGA/DhIP1Nwq0xoAaMWMspCgOdGOOKl65QLu0pfd9AUMkO1njUnKbfRgjoGCrLRgXJyAoMmR29nhi7kJjHaO6MGxI5+W7bOZrrk24rQPttb7VVa4OOUCPdOVRWcS/oUh8IfzlX02bmlbmcPBKqEIB2+yPdrdLf8N4ZVAWP+qiJl1aOgClAoW4Snvu8au5o7a9oKO2k8m+NmigXyQfzL6PzL5PP5GQgnrxHCRF/oBUcKbYuKLUgjmbT"
-        }
-      ]
-    }
-  },
-  "location": "eastus",
-  "maxAgentPools": 100,
-  "name": "reemAKSCluster",
-  "networkProfile": {
-    "dnsServiceIp": "10.0.0.10",
-    "dockerBridgeCidr": "172.17.0.1/16",
-    "loadBalancerProfile": {
-      "allocatedOutboundPorts": null,
-      "effectiveOutboundIPs": [
-        {
-          "id": "/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourceGroups/MC_reem-aks-group_reemAKSCluster_eastus/providers/Microsoft.Network/publicIPAddresses/41b64a75-85a3-4da7-9b25-79631b69e3ca",
-          "resourceGroup": "MC_reem-aks-group_reemAKSCluster_eastus"
-        }
-      ],
-      "idleTimeoutInMinutes": null,
-      "managedOutboundIPs": {
-        "count": 1
-      },
-      "outboundIPs": null,
-      "outboundIpPrefixes": null
-    },
-    "loadBalancerSku": "Standard",
-    "natGatewayProfile": null,
-    "networkMode": null,
-    "networkPlugin": "kubenet",
-    "networkPolicy": null,
-    "outboundType": "loadBalancer",
-    "podCidr": "10.244.0.0/16",
-    "serviceCidr": "10.0.0.0/16"
-  },
-  "nodeResourceGroup": "MC_reem-aks-group_reemAKSCluster_eastus",
-  "podIdentityProfile": null,
-  "powerState": {
-    "code": "Running"
-  },
-  "privateFqdn": null,
-  "privateLinkResources": null,
-  "provisioningState": "Succeeded",
-  "resourceGroup": "reem-aks-group",
-  "securityProfile": null,
-  "servicePrincipalProfile": {
-    "clientId": "msi",
-    "secret": null
-  },
-  "sku": {
-    "name": "Basic",
-    "tier": "Free"
-  },
-  "tags": null,
-  "type": "Microsoft.ContainerService/ManagedClusters",
-  "windowsProfile": null
+8.az ad sp create-for-rbac --role="owner" --scopes="/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourceGroups/reem-aks-group"
+Creating 'owner' role assignment under scope '/subscriptions/7ae0d07a-2044-47ce-8852-0da695dfce92/resourceGroups/reem-aks-group'
+The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials into your source control. For more information, see https://aka.ms/azadsp-cli
+'name' property in the output is deprecated and will be removed in the future. Use 'appId' instead.
+{
+  "appId": "e889f306-fce1-4797-a6dc-fbfecddf8e24",
+  "displayName": "azure-cli-2021-12-02-19-57-34",
+  "name": "e889f306-fce1-4797-a6dc-fbfecddf8e24",
+  "password": "0bPe4yZH..8aTSpoZPwxlMrmW_hoqtxGIf",
+  "tenant": "5968bebb-1f2b-4010-8037-321ba6474dbf"
 }
 
-8.az aks install-cli
 
-9.get credentials:
-az configure --defaults group=reem-aks-group
-az aks get-credentials --name reemAKSCluster
+9.create cluster  using aks-engine
+ ks-engine deploy --subscription-id 7ae0d07a-2044-47ce-8852-0da695dfce92 --resource-group reem-aks-group --location eastus  --api-model kubernetes.json
+ result:
+WARN[0037] Running only 1 control plane VM not recommended for production clusters, use 3 or 5 for control plane redundancy 
+WARN[0037] linuxProfile.enableUnattendedUpgrades configuration was not declared, your cluster nodes will be configured to run unattended-upgrade by default 
+INFO[0047] Starting ARM Deployment reem-aks-group-1932217656 in resource group reem-aks-group. This will take some time... 
+INFO[0462] Finished ARM Deployment (reem-aks-group-1932217656). Succeeded 
 
-10.verifay contexet:
-kubectl config current-context
-reemAKSCluster
-kubectl get nodes
-result:
-NAME                                STATUS   ROLES   AGE   VERSION
-aks-nodepool1-91768504-vmss000000   Ready    agent   67s   v1.21.2
+10#set config:
+$Env:KUBECONFIG=("kubeconfig.eastus.json")
+
+
+PS C:\reem\myTask\Kubernetes\_output\reem-aks-group2\kubeconfig> kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://reem-aks-group2.eastus.cloudapp.azure.com
+  name: reem-aks-group2
+contexts:
+- context:
+    cluster: reem-aks-group2
+    user: reem-aks-group2-admin
+  name: reem-aks-group2
+current-context: reem-aks-group2
+kind: Config
+preferences: {}
+users:
+- name: reem-aks-group2-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+
+11.verifay master is deployed
+C:\reem\myTask\Kubernetes> kubectl get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.0.0.1     <none>        443/TCP   5h48m
+PS C:\reem\myTask\Kubernetes> kubectl get nodes -A
+NAME                                 STATUS   ROLES    AGE     VERSION
+k8s-agentpool1-34759087-vmss000000   Ready    agent    5h41m   v1.20.11
+k8s-master-34759087-0                Ready    master   5h49m   v1.20.11
 
 12.deploy deployment and services to cluster:
 #source: https://www.magalix.com/blog/deploying-an-application-on-kubernetes-from-a-to-z
 
-C:\reem\myTask\k8s>kubectl apply -f deployment-service-a.yml
+ C:\reem\myTask\Kubernetes> kubectl apply -f .\deployment-service-a.yml
 namespace/s1-ns created
 deployment.apps/service-a created
-
-C:\reem\myTask\k8s>kubectl apply -f deployment-service-b.yml 
+ C:\reem\myTask\Kubernetes> kubectl apply -f .\deployment-service-b.yml
 namespace/s2-ns created
 deployment.apps/service-b created
 
-C:\reem\myTask\k8s>kubectl apply -f service-a-svc.yml       
+C:\reem\myTask\Kubernetes> kubectl apply -f .\service-a-svc.yml
 service/service-a-svc created
-
-C:\reem\myTask\k8s>kubectl apply -f service-b-svc.yml   
+C:\reem\myTask\Kubernetes> kubectl apply -f .\service-b-svc.yml
 service/service-b-svc created
 
 
@@ -235,5 +121,6 @@ C:\reem\myTask\k8s>kubectl apply -f deny-from-other-namespaces.yml
 networkpolicy.networking.k8s.io/deny-from-other-namespaces created
 
 
-enter on web browser: http://20.102.36.173/service-a
+enter on web browser: 
+http://20.102.36.173/service-a
 http://20.102.36.173/service-b

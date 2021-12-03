@@ -1,0 +1,38 @@
+{
+    "apiVersion": "vlabs",
+    "properties": {
+        "orchestratorProfile": {
+            "orchestratorType":"Kubernetes",
+            "orchestratorRelease":"1.20",
+          "kubernetesConfig": {
+                "networkPolicy":"calico"
+              }
+           },
+        "masterProfile": {
+        "count": 1,
+        "dnsPrefix": "reem-aks-group2",
+        "vmSize": "Standard_D2_v2"
+      },
+      "agentPoolProfiles": [
+        {
+          "name": "agentpool1",
+          "count": 1,
+          "vmSize": "Standard_D2_v2"
+        }
+      ],
+      "linuxProfile": {
+        "adminUsername": "azureuser",
+        "ssh": {
+          "publicKeys": [
+            {
+              "keyData": ""
+            }
+          ]
+        }
+      },
+      "servicePrincipalProfile": {
+        "clientId": "e889f306-fce1-4797-a6dc-fbfecddf8e24",
+        "secret"  : "0bPe4yZH..8aTSpoZPwxlMrmW_hoqtxGIf"
+      }
+    }
+  }

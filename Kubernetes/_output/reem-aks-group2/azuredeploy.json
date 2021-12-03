@@ -1,0 +1,2796 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "agentSubnet": {
+      "defaultValue": "",
+      "metadata": {
+        "description": "Sets the subnet of the agent node(s)."
+      },
+      "type": "string"
+    },
+    "agentpool1Count": {
+      "defaultValue": 1,
+      "metadata": {
+        "description": "The number of vms in agent pool agentpool1"
+      },
+      "type": "int"
+    },
+    "agentpool1Subnet": {
+      "defaultValue": "10.240.0.0/12",
+      "metadata": {
+        "description": "Sets the subnet of agent pool 'agentpool1'."
+      },
+      "type": "string"
+    },
+    "agentpool1VMSize": {
+      "allowedValues": [
+        "Standard_A0",
+        "Standard_A1",
+        "Standard_A10",
+        "Standard_A11",
+        "Standard_A1_v2",
+        "Standard_A2",
+        "Standard_A2_v2",
+        "Standard_A2m_v2",
+        "Standard_A3",
+        "Standard_A4",
+        "Standard_A4_v2",
+        "Standard_A4m_v2",
+        "Standard_A5",
+        "Standard_A6",
+        "Standard_A7",
+        "Standard_A8",
+        "Standard_A8_v2",
+        "Standard_A8m_v2",
+        "Standard_A9",
+        "Standard_B12ms",
+        "Standard_B16ms",
+        "Standard_B1ls",
+        "Standard_B1ms",
+        "Standard_B1s",
+        "Standard_B20ms",
+        "Standard_B2ms",
+        "Standard_B2s",
+        "Standard_B4ms",
+        "Standard_B8ms",
+        "Standard_D1",
+        "Standard_D11",
+        "Standard_D11_v2",
+        "Standard_D11_v2_Promo",
+        "Standard_D12",
+        "Standard_D12_v2",
+        "Standard_D12_v2",
+        "Standard_D12_v2_Promo",
+        "Standard_D13",
+        "Standard_D13_v2",
+        "Standard_D13_v2_Promo",
+        "Standard_D14",
+        "Standard_D14_v2",
+        "Standard_D14_v2_Promo",
+        "Standard_D15_v2",
+        "Standard_D16_v3",
+        "Standard_D16_v4",
+        "Standard_D16a_v3",
+        "Standard_D16a_v4",
+        "Standard_D16as_v3",
+        "Standard_D16as_v4",
+        "Standard_D16d_v4",
+        "Standard_D16ds_v4",
+        "Standard_D16s_v3",
+        "Standard_D16s_v4",
+        "Standard_D1_v2",
+        "Standard_D2",
+        "Standard_D2_v2",
+        "Standard_D2_v2_Promo",
+        "Standard_D2_v3",
+        "Standard_D2_v4",
+        "Standard_D2a_v3",
+        "Standard_D2a_v4",
+        "Standard_D2as_v3",
+        "Standard_D2as_v4",
+        "Standard_D2d_v4",
+        "Standard_D2ds_v4",
+        "Standard_D2s_v3",
+        "Standard_D2s_v4",
+        "Standard_D3",
+        "Standard_D32_v3",
+        "Standard_D32_v4",
+        "Standard_D32a_v3",
+        "Standard_D32a_v4",
+        "Standard_D32as_v3",
+        "Standard_D32as_v4",
+        "Standard_D32d_v4",
+        "Standard_D32ds_v4",
+        "Standard_D32s_v3",
+        "Standard_D32s_v4",
+        "Standard_D3_v2",
+        "Standard_D3_v2_Promo",
+        "Standard_D4",
+        "Standard_D48_v3",
+        "Standard_D48_v4",
+        "Standard_D48a_v3",
+        "Standard_D48a_v4",
+        "Standard_D48as_v3",
+        "Standard_D48as_v4",
+        "Standard_D48d_v4",
+        "Standard_D48ds_v4",
+        "Standard_D48s_v3",
+        "Standard_D48s_v4",
+        "Standard_D4_v2",
+        "Standard_D4_v2_Promo",
+        "Standard_D4_v3",
+        "Standard_D4_v4",
+        "Standard_D4a_v3",
+        "Standard_D4a_v4",
+        "Standard_D4as_v3",
+        "Standard_D4as_v4",
+        "Standard_D4d_v4",
+        "Standard_D4ds_v4",
+        "Standard_D4s_v3",
+        "Standard_D4s_v4",
+        "Standard_D5_v2",
+        "Standard_D5_v2_Promo",
+        "Standard_D64_v3",
+        "Standard_D64_v4",
+        "Standard_D64a_v3",
+        "Standard_D64a_v4",
+        "Standard_D64as_v3",
+        "Standard_D64as_v4",
+        "Standard_D64d_v4",
+        "Standard_D64ds_v4",
+        "Standard_D64s_v3",
+        "Standard_D64s_v4",
+        "Standard_D8_v3",
+        "Standard_D8_v4",
+        "Standard_D8a_v3",
+        "Standard_D8a_v4",
+        "Standard_D8as_v3",
+        "Standard_D8as_v4",
+        "Standard_D8d_v4",
+        "Standard_D8ds_v4",
+        "Standard_D8s_v3",
+        "Standard_D8s_v4",
+        "Standard_D96a_v3",
+        "Standard_D96a_v4",
+        "Standard_D96as_v3",
+        "Standard_D96as_v4",
+        "Standard_DC1s_v2",
+        "Standard_DC2s",
+        "Standard_DC2s_v2",
+        "Standard_DC4s",
+        "Standard_DC4s_v2",
+        "Standard_DC8_v2",
+        "Standard_DC8s",
+        "Standard_DS1",
+        "Standard_DS11",
+        "Standard_DS11-1_v2",
+        "Standard_DS11_v2",
+        "Standard_DS11_v2_Promo",
+        "Standard_DS12",
+        "Standard_DS12-1_v2",
+        "Standard_DS12-2_v2",
+        "Standard_DS12_v2",
+        "Standard_DS12_v2_Promo",
+        "Standard_DS13",
+        "Standard_DS13-2_v2",
+        "Standard_DS13-4_v2",
+        "Standard_DS13_v2",
+        "Standard_DS13_v2_Promo",
+        "Standard_DS14",
+        "Standard_DS14-4_v2",
+        "Standard_DS14-8_v2",
+        "Standard_DS14_v2",
+        "Standard_DS14_v2_Promo",
+        "Standard_DS15_v2",
+        "Standard_DS1_v2",
+        "Standard_DS2",
+        "Standard_DS2_v2",
+        "Standard_DS2_v2_Promo",
+        "Standard_DS3",
+        "Standard_DS3_v2",
+        "Standard_DS3_v2_Promo",
+        "Standard_DS4",
+        "Standard_DS4_v2",
+        "Standard_DS4_v2_Promo",
+        "Standard_DS5_v2",
+        "Standard_DS5_v2_Promo",
+        "Standard_E16-4as_v4",
+        "Standard_E16-4ds_v4",
+        "Standard_E16-4s_v3",
+        "Standard_E16-4s_v4",
+        "Standard_E16-8as_v4",
+        "Standard_E16-8ds_v4",
+        "Standard_E16-8s_v3",
+        "Standard_E16-8s_v4",
+        "Standard_E16_v3",
+        "Standard_E16_v4",
+        "Standard_E16a_v3",
+        "Standard_E16a_v4",
+        "Standard_E16as_v3",
+        "Standard_E16as_v4",
+        "Standard_E16d_v4",
+        "Standard_E16ds_v4",
+        "Standard_E16s_v3",
+        "Standard_E16s_v4",
+        "Standard_E20_v3",
+        "Standard_E20_v4",
+        "Standard_E20a_v4",
+        "Standard_E20as_v4",
+        "Standard_E20d_v4",
+        "Standard_E20ds_v4",
+        "Standard_E20s_v3",
+        "Standard_E20s_v4",
+        "Standard_E2_v3",
+        "Standard_E2_v4",
+        "Standard_E2a_v3",
+        "Standard_E2a_v4",
+        "Standard_E2as_v3",
+        "Standard_E2as_v4",
+        "Standard_E2d_v4",
+        "Standard_E2ds_v4",
+        "Standard_E2s_v3",
+        "Standard_E2s_v4",
+        "Standard_E32-16as_v4",
+        "Standard_E32-16ds_v4",
+        "Standard_E32-16s_v3",
+        "Standard_E32-16s_v4",
+        "Standard_E32-8as_v4",
+        "Standard_E32-8ds_v4",
+        "Standard_E32-8s_v3",
+        "Standard_E32-8s_v4",
+        "Standard_E32_v3",
+        "Standard_E32_v4",
+        "Standard_E32a_v3",
+        "Standard_E32a_v4",
+        "Standard_E32as_v3",
+        "Standard_E32as_v4",
+        "Standard_E32d_v4",
+        "Standard_E32ds_v4",
+        "Standard_E32s_v3",
+        "Standard_E32s_v4",
+        "Standard_E4-2as_v4",
+        "Standard_E4-2ds_v4",
+        "Standard_E4-2s_v3",
+        "Standard_E4-2s_v4",
+        "Standard_E48_v3",
+        "Standard_E48_v4",
+        "Standard_E48a_v3",
+        "Standard_E48a_v4",
+        "Standard_E48as_v3",
+        "Standard_E48as_v4",
+        "Standard_E48d_v4",
+        "Standard_E48ds_v4",
+        "Standard_E48s_v3",
+        "Standard_E48s_v4",
+        "Standard_E4_v3",
+        "Standard_E4_v4",
+        "Standard_E4a_v3",
+        "Standard_E4a_v4",
+        "Standard_E4as_v3",
+        "Standard_E4as_v4",
+        "Standard_E4d_v4",
+        "Standard_E4ds_v4",
+        "Standard_E4s_v3",
+        "Standard_E4s_v4",
+        "Standard_E64-16as_v4",
+        "Standard_E64-16ds_v4",
+        "Standard_E64-16s_v3",
+        "Standard_E64-16s_v4",
+        "Standard_E64-32as_v4",
+        "Standard_E64-32ds_v4",
+        "Standard_E64-32s_v3",
+        "Standard_E64-32s_v4",
+        "Standard_E64_v3",
+        "Standard_E64_v4",
+        "Standard_E64a_v3",
+        "Standard_E64a_v4",
+        "Standard_E64as_v3",
+        "Standard_E64as_v4",
+        "Standard_E64d_v4",
+        "Standard_E64ds_v4",
+        "Standard_E64i_v3",
+        "Standard_E64is_v3",
+        "Standard_E64s_v3",
+        "Standard_E64s_v4",
+        "Standard_E8-2as_v4",
+        "Standard_E8-2ds_v4",
+        "Standard_E8-2s_v3",
+        "Standard_E8-2s_v4",
+        "Standard_E8-4as_v4",
+        "Standard_E8-4ds_v4",
+        "Standard_E8-4s_v3",
+        "Standard_E8-4s_v4",
+        "Standard_E80ids_v4",
+        "Standard_E80is_v4",
+        "Standard_E8_v3",
+        "Standard_E8_v4",
+        "Standard_E8a_v3",
+        "Standard_E8a_v4",
+        "Standard_E8as_v3",
+        "Standard_E8as_v4",
+        "Standard_E8d_v4",
+        "Standard_E8ds_v4",
+        "Standard_E8s_v3",
+        "Standard_E8s_v4",
+        "Standard_E96-24as_v4",
+        "Standard_E96-48as_v4",
+        "Standard_E96a_v4",
+        "Standard_E96as_v4",
+        "Standard_F1",
+        "Standard_F16",
+        "Standard_F16s",
+        "Standard_F16s_v2",
+        "Standard_F1s",
+        "Standard_F2",
+        "Standard_F2s",
+        "Standard_F2s_v2",
+        "Standard_F32s_v2",
+        "Standard_F4",
+        "Standard_F48s_v2",
+        "Standard_F4s",
+        "Standard_F4s_v2",
+        "Standard_F64s_v2",
+        "Standard_F72s_v2",
+        "Standard_F8",
+        "Standard_F8s",
+        "Standard_F8s_v2",
+        "Standard_FX12mds",
+        "Standard_FX24mds",
+        "Standard_FX36mds",
+        "Standard_FX48mds",
+        "Standard_FX4mds",
+        "Standard_G1",
+        "Standard_G2",
+        "Standard_G3",
+        "Standard_G4",
+        "Standard_G5",
+        "Standard_GS1",
+        "Standard_GS2",
+        "Standard_GS3",
+        "Standard_GS4",
+        "Standard_GS4-4",
+        "Standard_GS4-8",
+        "Standard_GS5",
+        "Standard_GS5-16",
+        "Standard_GS5-8",
+        "Standard_H16",
+        "Standard_H16_Promo",
+        "Standard_H16m",
+        "Standard_H16m_Promo",
+        "Standard_H16mr",
+        "Standard_H16mr_Promo",
+        "Standard_H16r",
+        "Standard_H16r_Promo",
+        "Standard_H8",
+        "Standard_H8_Promo",
+        "Standard_H8m",
+        "Standard_H8m_Promo",
+        "Standard_HB120-16rs_v3",
+        "Standard_HB120-32rs_v3",
+        "Standard_HB120-64rs_v3",
+        "Standard_HB120-96rs_v3",
+        "Standard_HB120rs_v2",
+        "Standard_HB120rs_v3",
+        "Standard_HB60rs",
+        "Standard_HC44rs",
+        "Standard_L16s",
+        "Standard_L16s_v2",
+        "Standard_L32s",
+        "Standard_L32s_v2",
+        "Standard_L48s_v2",
+        "Standard_L4s",
+        "Standard_L64s_v2",
+        "Standard_L80s_v2",
+        "Standard_L8s",
+        "Standard_L8s_v2",
+        "Standard_LRS",
+        "Standard_M128",
+        "Standard_M128-32ms",
+        "Standard_M128-64ms",
+        "Standard_M128dms_v2",
+        "Standard_M128ds_v2",
+        "Standard_M128m",
+        "Standard_M128ms",
+        "Standard_M128ms_v2",
+        "Standard_M128s",
+        "Standard_M128s_v2",
+        "Standard_M16-4ms",
+        "Standard_M16-8ms",
+        "Standard_M16ms",
+        "Standard_M192idms_v2",
+        "Standard_M192ids_v2",
+        "Standard_M192ims_v2",
+        "Standard_M192is_v2",
+        "Standard_M192ms_v2",
+        "Standard_M192s_v2",
+        "Standard_M208ms_v2",
+        "Standard_M208s_v2",
+        "Standard_M24ms_v2",
+        "Standard_M24s_v2",
+        "Standard_M32-16ms",
+        "Standard_M32-8ms",
+        "Standard_M32dms_v2",
+        "Standard_M32ls",
+        "Standard_M32ms",
+        "Standard_M32ms_v2",
+        "Standard_M32ts",
+        "Standard_M416-208ms_v2",
+        "Standard_M416-208s_v2",
+        "Standard_M416ms_v2",
+        "Standard_M416s_v2",
+        "Standard_M48ms_v2",
+        "Standard_M48s_v2",
+        "Standard_M64",
+        "Standard_M64-16ms",
+        "Standard_M64-32ms",
+        "Standard_M64dms_v2",
+        "Standard_M64ds_v2",
+        "Standard_M64ls",
+        "Standard_M64m",
+        "Standard_M64ms",
+        "Standard_M64ms_v2",
+        "Standard_M64s",
+        "Standard_M64s_v2",
+        "Standard_M8-2ms",
+        "Standard_M8-4ms",
+        "Standard_M8ms",
+        "Standard_M96ms_v2",
+        "Standard_M96s_v2",
+        "Standard_NC12",
+        "Standard_NC12_Promo",
+        "Standard_NC12s_v2",
+        "Standard_NC12s_v3",
+        "Standard_NC16as_T4_v3",
+        "Standard_NC24",
+        "Standard_NC24_Promo",
+        "Standard_NC24r",
+        "Standard_NC24r_Promo",
+        "Standard_NC24rs_v2",
+        "Standard_NC24rs_v3",
+        "Standard_NC24s_v2",
+        "Standard_NC24s_v3",
+        "Standard_NC4as_T4_v3",
+        "Standard_NC6",
+        "Standard_NC64as_T4_v3",
+        "Standard_NC6_Promo",
+        "Standard_NC6s_v2",
+        "Standard_NC6s_v3",
+        "Standard_NC8as_T4_v3",
+        "Standard_ND12s",
+        "Standard_ND24rs",
+        "Standard_ND24s",
+        "Standard_ND40rs_v2",
+        "Standard_ND40s_v3",
+        "Standard_ND6s",
+        "Standard_ND96asr_v4",
+        "Standard_NP10s",
+        "Standard_NP20s",
+        "Standard_NP40s",
+        "Standard_NV12",
+        "Standard_NV12_Promo",
+        "Standard_NV12s_v2",
+        "Standard_NV12s_v3",
+        "Standard_NV16as_v4",
+        "Standard_NV24",
+        "Standard_NV24_Promo",
+        "Standard_NV24s_v2",
+        "Standard_NV24s_v3",
+        "Standard_NV32as_v4",
+        "Standard_NV48s_v3",
+        "Standard_NV4as_v4",
+        "Standard_NV6",
+        "Standard_NV6_Promo",
+        "Standard_NV6s_v2",
+        "Standard_NV8as_v4",
+        "Standard_PB12s",
+        "Standard_PB24s",
+        "Standard_PB6s",
+        "Standard_ZRS"
+      ],
+      "defaultValue": "Standard_D2_v2",
+      "metadata": {
+        "description": "The size of the Virtual Machine."
+      },
+      "type": "string"
+    },
+    "agentpool1osImageName": {
+      "defaultValue": "",
+      "metadata": {
+        "description": "Name of a Linux OS image. Needs to be used in conjuction with osImageResourceGroup."
+      },
+      "type": "string"
+    },
+    "agentpool1osImageOffer": {
+      "defaultValue": "UbuntuServer",
+      "metadata": {
+        "description": "Linux OS image type."
+      },
+      "type": "string"
+    },
+    "agentpool1osImagePublisher": {
+      "defaultValue": "Canonical",
+      "metadata": {
+        "description": "OS image publisher."
+      },
+      "type": "string"
+    },
+    "agentpool1osImageResourceGroup": {
+      "defaultValue": "",
+      "metadata": {
+        "description": "Resource group of a Linux OS image. Needs to be used in conjuction with osImageName."
+      },
+      "type": "string"
+    },
+    "agentpool1osImageSKU": {
+      "defaultValue": "16.04-LTS",
+      "metadata": {
+        "description": "OS image SKU."
+      },
+      "type": "string"
+    },
+    "agentpool1osImageVersion": {
+      "defaultValue": "latest",
+      "metadata": {
+        "description": "OS image version."
+      },
+      "type": "string"
+    },
+    "aksEngineVersion": {
+      "metadata": {
+        "description": "Contains details of the aks-engine version which was used to provision the cluster"
+      },
+      "type": "string"
+    },
+    "apiServerCertificate": {
+      "metadata": {
+        "description": "The base 64 server certificate used on the master"
+      },
+      "type": "string"
+    },
+    "apiServerPrivateKey": {
+      "metadata": {
+        "description": "The base 64 server private key used on the master."
+      },
+      "type": "securestring"
+    },
+    "caCertificate": {
+      "metadata": {
+        "description": "The base 64 certificate authority certificate"
+      },
+      "type": "string"
+    },
+    "caPrivateKey": {
+      "metadata": {
+        "description": "The base 64 CA private key used on the master."
+      },
+      "type": "securestring"
+    },
+    "clientCertificate": {
+      "metadata": {
+        "description": "The base 64 client certificate used to communicate with the master"
+      },
+      "type": "string"
+    },
+    "clientPrivateKey": {
+      "metadata": {
+        "description": "The base 64 client private key used to communicate with the master"
+      },
+      "type": "securestring"
+    },
+    "cloudproviderConfig": {
+      "defaultValue": {
+        "cloudProviderBackoff": false,
+        "cloudProviderBackoffDuration": 0,
+        "cloudProviderBackoffExponent": "0",
+        "cloudProviderBackoffJitter": "0",
+        "cloudProviderBackoffMode": "v1",
+        "cloudProviderBackoffRetries": 10,
+        "cloudProviderDisableOutboundSNAT": false,
+        "cloudProviderRateLimit": false,
+        "cloudProviderRateLimitBucket": 0,
+        "cloudProviderRateLimitBucketWrite": 0,
+        "cloudProviderRateLimitQPS": "0",
+        "cloudProviderRateLimitQPSWrite": "0"
+      },
+      "type": "object"
+    },
+    "cniPluginsURL": {
+      "defaultValue": "https://kubernetesartifacts.azureedge.net/cni-plugins/v0.7.6/binaries/cni-plugins-amd64-v0.7.6.tgz",
+      "type": "string"
+    },
+    "containerRuntime": {
+      "allowedValues": [
+        "docker",
+        "containerd"
+      ],
+      "defaultValue": "docker",
+      "metadata": {
+        "description": "The container runtime to use (docker|containerd)"
+      },
+      "type": "string"
+    },
+    "containerdDownloadURLBase": {
+      "defaultValue": "https://storage.googleapis.com/cri-containerd-release/",
+      "type": "string"
+    },
+    "containerdVersion": {
+      "allowedValues": [
+        "1.3.2",
+        "1.3.3",
+        "1.3.4",
+        "1.3.5",
+        "1.3.6",
+        "1.3.7",
+        "1.3.8",
+        "1.3.9",
+        "1.4.4",
+        "1.4.6"
+      ],
+      "defaultValue": "1.4.6",
+      "metadata": {
+        "description": "The Azure Moby build version"
+      },
+      "type": "string"
+    },
+    "dockerBridgeCidr": {
+      "metadata": {
+        "description": "Docker bridge network IP address and subnet"
+      },
+      "type": "string"
+    },
+    "enableAggregatedAPIs": {
+      "defaultValue": false,
+      "metadata": {
+        "description": "Enable aggregated API on master nodes"
+      },
+      "type": "bool"
+    },
+    "etcdClientCertificate": {
+      "metadata": {
+        "description": "The base 64 server certificate used on the master"
+      },
+      "type": "string"
+    },
+    "etcdClientPrivateKey": {
+      "metadata": {
+        "description": "The base 64 server private key used on the master."
+      },
+      "type": "securestring"
+    },
+    "etcdDiskSizeGB": {
+      "metadata": {
+        "description": "Size in GB to allocate for etcd volume"
+      },
+      "type": "string"
+    },
+    "etcdDownloadURLBase": {
+      "metadata": {
+        "description": "etcd image base URL"
+      },
+      "type": "string"
+    },
+    "etcdEncryptionKey": {
+      "metadata": {
+        "description": "Encryption at rest key for etcd"
+      },
+      "type": "string"
+    },
+    "etcdPeerCertificate0": {
+      "metadata": {
+        "description": "The base 64 server certificates used on the master"
+      },
+      "type": "string"
+    },
+    "etcdPeerPrivateKey0": {
+      "metadata": {
+        "description": "The base 64 server private keys used on the master."
+      },
+      "type": "securestring"
+    },
+    "etcdServerCertificate": {
+      "metadata": {
+        "description": "The base 64 server certificate used on the master"
+      },
+      "type": "string"
+    },
+    "etcdServerPrivateKey": {
+      "metadata": {
+        "description": "The base 64 server private key used on the master."
+      },
+      "type": "securestring"
+    },
+    "etcdVersion": {
+      "metadata": {
+        "description": "etcd version"
+      },
+      "type": "string"
+    },
+    "firstConsecutiveStaticIP": {
+      "defaultValue": "10.255.255.5",
+      "metadata": {
+        "description": "Sets the static IP of the first master"
+      },
+      "type": "string"
+    },
+    "fqdnEndpointSuffix": {
+      "defaultValue": "cloudapp.azure.com",
+      "metadata": {
+        "description": "Endpoint of FQDN."
+      },
+      "type": "string"
+    },
+    "gcHighThreshold": {
+      "defaultValue": 85,
+      "metadata": {
+        "description": "High Threshold for Image Garbage collection on each node"
+      },
+      "type": "int"
+    },
+    "gcLowThreshold": {
+      "defaultValue": 80,
+      "metadata": {
+        "description": "Low Threshold for Image Garbage collection on each node."
+      },
+      "type": "int"
+    },
+    "generatorCode": {
+      "metadata": {
+        "description": "The generator code used to identify the generator"
+      },
+      "type": "string"
+    },
+    "kubeBinaryURL": {
+      "defaultValue": "",
+      "metadata": {
+        "description": "The package tarball URL to extract kubelet and kubectl binaries from."
+      },
+      "type": "string"
+    },
+    "kubeClusterCidr": {
+      "metadata": {
+        "description": "Kubernetes cluster subnet"
+      },
+      "type": "string"
+    },
+    "kubeConfigCertificate": {
+      "metadata": {
+        "description": "The base 64 certificate used by cli to communicate with the master"
+      },
+      "type": "string"
+    },
+    "kubeConfigPrivateKey": {
+      "metadata": {
+        "description": "The base 64 private key used by cli to communicate with the master"
+      },
+      "type": "securestring"
+    },
+    "kubeDNSServiceIP": {
+      "metadata": {
+        "description": "Kubernetes DNS IP"
+      },
+      "type": "string"
+    },
+    "linuxAdminUsername": {
+      "metadata": {
+        "description": "User name for the Linux Virtual Machines (SSH or Password)."
+      },
+      "type": "string"
+    },
+    "location": {
+      "defaultValue": "eastus",
+      "metadata": {
+        "description": "Sets the location for all resources in the cluster"
+      },
+      "type": "string"
+    },
+    "masterEndpointDNSNamePrefix": {
+      "metadata": {
+        "description": "Sets the Domain name label for the master IP Address.  The concatenation of the domain name label and the regional DNS zone make up the fully qualified domain name associated with the public IP address."
+      },
+      "type": "string"
+    },
+    "masterOffset": {
+      "allowedValues": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "defaultValue": 0,
+      "metadata": {
+        "description": "The offset into the master pool where to start creating master VMs.  This value can be from 0 to 4, but must be less than masterCount."
+      },
+      "type": "int"
+    },
+    "masterSubnet": {
+      "defaultValue": "10.240.0.0/12",
+      "metadata": {
+        "description": "Sets the subnet of the master node(s)."
+      },
+      "type": "string"
+    },
+    "masterSubnetIPv6": {
+      "defaultValue": "2001:1234:5678:9abc::/64",
+      "metadata": {
+        "description": "Sets the IPv6 subnet of the master node(s)."
+      },
+      "type": "string"
+    },
+    "masterVMSize": {
+      "allowedValues": [
+        "Standard_A0",
+        "Standard_A1",
+        "Standard_A10",
+        "Standard_A11",
+        "Standard_A1_v2",
+        "Standard_A2",
+        "Standard_A2_v2",
+        "Standard_A2m_v2",
+        "Standard_A3",
+        "Standard_A4",
+        "Standard_A4_v2",
+        "Standard_A4m_v2",
+        "Standard_A5",
+        "Standard_A6",
+        "Standard_A7",
+        "Standard_A8",
+        "Standard_A8_v2",
+        "Standard_A8m_v2",
+        "Standard_A9",
+        "Standard_B12ms",
+        "Standard_B16ms",
+        "Standard_B1ls",
+        "Standard_B1ms",
+        "Standard_B1s",
+        "Standard_B20ms",
+        "Standard_B2ms",
+        "Standard_B2s",
+        "Standard_B4ms",
+        "Standard_B8ms",
+        "Standard_D1",
+        "Standard_D11",
+        "Standard_D11_v2",
+        "Standard_D11_v2_Promo",
+        "Standard_D12",
+        "Standard_D12_v2",
+        "Standard_D12_v2",
+        "Standard_D12_v2_Promo",
+        "Standard_D13",
+        "Standard_D13_v2",
+        "Standard_D13_v2_Promo",
+        "Standard_D14",
+        "Standard_D14_v2",
+        "Standard_D14_v2_Promo",
+        "Standard_D15_v2",
+        "Standard_D16_v3",
+        "Standard_D16_v4",
+        "Standard_D16a_v3",
+        "Standard_D16a_v4",
+        "Standard_D16as_v3",
+        "Standard_D16as_v4",
+        "Standard_D16d_v4",
+        "Standard_D16ds_v4",
+        "Standard_D16s_v3",
+        "Standard_D16s_v4",
+        "Standard_D1_v2",
+        "Standard_D2",
+        "Standard_D2_v2",
+        "Standard_D2_v2_Promo",
+        "Standard_D2_v3",
+        "Standard_D2_v4",
+        "Standard_D2a_v3",
+        "Standard_D2a_v4",
+        "Standard_D2as_v3",
+        "Standard_D2as_v4",
+        "Standard_D2d_v4",
+        "Standard_D2ds_v4",
+        "Standard_D2s_v3",
+        "Standard_D2s_v4",
+        "Standard_D3",
+        "Standard_D32_v3",
+        "Standard_D32_v4",
+        "Standard_D32a_v3",
+        "Standard_D32a_v4",
+        "Standard_D32as_v3",
+        "Standard_D32as_v4",
+        "Standard_D32d_v4",
+        "Standard_D32ds_v4",
+        "Standard_D32s_v3",
+        "Standard_D32s_v4",
+        "Standard_D3_v2",
+        "Standard_D3_v2_Promo",
+        "Standard_D4",
+        "Standard_D48_v3",
+        "Standard_D48_v4",
+        "Standard_D48a_v3",
+        "Standard_D48a_v4",
+        "Standard_D48as_v3",
+        "Standard_D48as_v4",
+        "Standard_D48d_v4",
+        "Standard_D48ds_v4",
+        "Standard_D48s_v3",
+        "Standard_D48s_v4",
+        "Standard_D4_v2",
+        "Standard_D4_v2_Promo",
+        "Standard_D4_v3",
+        "Standard_D4_v4",
+        "Standard_D4a_v3",
+        "Standard_D4a_v4",
+        "Standard_D4as_v3",
+        "Standard_D4as_v4",
+        "Standard_D4d_v4",
+        "Standard_D4ds_v4",
+        "Standard_D4s_v3",
+        "Standard_D4s_v4",
+        "Standard_D5_v2",
+        "Standard_D5_v2_Promo",
+        "Standard_D64_v3",
+        "Standard_D64_v4",
+        "Standard_D64a_v3",
+        "Standard_D64a_v4",
+        "Standard_D64as_v3",
+        "Standard_D64as_v4",
+        "Standard_D64d_v4",
+        "Standard_D64ds_v4",
+        "Standard_D64s_v3",
+        "Standard_D64s_v4",
+        "Standard_D8_v3",
+        "Standard_D8_v4",
+        "Standard_D8a_v3",
+        "Standard_D8a_v4",
+        "Standard_D8as_v3",
+        "Standard_D8as_v4",
+        "Standard_D8d_v4",
+        "Standard_D8ds_v4",
+        "Standard_D8s_v3",
+        "Standard_D8s_v4",
+        "Standard_D96a_v3",
+        "Standard_D96a_v4",
+        "Standard_D96as_v3",
+        "Standard_D96as_v4",
+        "Standard_DC1s_v2",
+        "Standard_DC2s",
+        "Standard_DC2s_v2",
+        "Standard_DC4s",
+        "Standard_DC4s_v2",
+        "Standard_DC8_v2",
+        "Standard_DC8s",
+        "Standard_DS1",
+        "Standard_DS11",
+        "Standard_DS11-1_v2",
+        "Standard_DS11_v2",
+        "Standard_DS11_v2_Promo",
+        "Standard_DS12",
+        "Standard_DS12-1_v2",
+        "Standard_DS12-2_v2",
+        "Standard_DS12_v2",
+        "Standard_DS12_v2_Promo",
+        "Standard_DS13",
+        "Standard_DS13-2_v2",
+        "Standard_DS13-4_v2",
+        "Standard_DS13_v2",
+        "Standard_DS13_v2_Promo",
+        "Standard_DS14",
+        "Standard_DS14-4_v2",
+        "Standard_DS14-8_v2",
+        "Standard_DS14_v2",
+        "Standard_DS14_v2_Promo",
+        "Standard_DS15_v2",
+        "Standard_DS1_v2",
+        "Standard_DS2",
+        "Standard_DS2_v2",
+        "Standard_DS2_v2_Promo",
+        "Standard_DS3",
+        "Standard_DS3_v2",
+        "Standard_DS3_v2_Promo",
+        "Standard_DS4",
+        "Standard_DS4_v2",
+        "Standard_DS4_v2_Promo",
+        "Standard_DS5_v2",
+        "Standard_DS5_v2_Promo",
+        "Standard_E16-4as_v4",
+        "Standard_E16-4ds_v4",
+        "Standard_E16-4s_v3",
+        "Standard_E16-4s_v4",
+        "Standard_E16-8as_v4",
+        "Standard_E16-8ds_v4",
+        "Standard_E16-8s_v3",
+        "Standard_E16-8s_v4",
+        "Standard_E16_v3",
+        "Standard_E16_v4",
+        "Standard_E16a_v3",
+        "Standard_E16a_v4",
+        "Standard_E16as_v3",
+        "Standard_E16as_v4",
+        "Standard_E16d_v4",
+        "Standard_E16ds_v4",
+        "Standard_E16s_v3",
+        "Standard_E16s_v4",
+        "Standard_E20_v3",
+        "Standard_E20_v4",
+        "Standard_E20a_v4",
+        "Standard_E20as_v4",
+        "Standard_E20d_v4",
+        "Standard_E20ds_v4",
+        "Standard_E20s_v3",
+        "Standard_E20s_v4",
+        "Standard_E2_v3",
+        "Standard_E2_v4",
+        "Standard_E2a_v3",
+        "Standard_E2a_v4",
+        "Standard_E2as_v3",
+        "Standard_E2as_v4",
+        "Standard_E2d_v4",
+        "Standard_E2ds_v4",
+        "Standard_E2s_v3",
+        "Standard_E2s_v4",
+        "Standard_E32-16as_v4",
+        "Standard_E32-16ds_v4",
+        "Standard_E32-16s_v3",
+        "Standard_E32-16s_v4",
+        "Standard_E32-8as_v4",
+        "Standard_E32-8ds_v4",
+        "Standard_E32-8s_v3",
+        "Standard_E32-8s_v4",
+        "Standard_E32_v3",
+        "Standard_E32_v4",
+        "Standard_E32a_v3",
+        "Standard_E32a_v4",
+        "Standard_E32as_v3",
+        "Standard_E32as_v4",
+        "Standard_E32d_v4",
+        "Standard_E32ds_v4",
+        "Standard_E32s_v3",
+        "Standard_E32s_v4",
+        "Standard_E4-2as_v4",
+        "Standard_E4-2ds_v4",
+        "Standard_E4-2s_v3",
+        "Standard_E4-2s_v4",
+        "Standard_E48_v3",
+        "Standard_E48_v4",
+        "Standard_E48a_v3",
+        "Standard_E48a_v4",
+        "Standard_E48as_v3",
+        "Standard_E48as_v4",
+        "Standard_E48d_v4",
+        "Standard_E48ds_v4",
+        "Standard_E48s_v3",
+        "Standard_E48s_v4",
+        "Standard_E4_v3",
+        "Standard_E4_v4",
+        "Standard_E4a_v3",
+        "Standard_E4a_v4",
+        "Standard_E4as_v3",
+        "Standard_E4as_v4",
+        "Standard_E4d_v4",
+        "Standard_E4ds_v4",
+        "Standard_E4s_v3",
+        "Standard_E4s_v4",
+        "Standard_E64-16as_v4",
+        "Standard_E64-16ds_v4",
+        "Standard_E64-16s_v3",
+        "Standard_E64-16s_v4",
+        "Standard_E64-32as_v4",
+        "Standard_E64-32ds_v4",
+        "Standard_E64-32s_v3",
+        "Standard_E64-32s_v4",
+        "Standard_E64_v3",
+        "Standard_E64_v4",
+        "Standard_E64a_v3",
+        "Standard_E64a_v4",
+        "Standard_E64as_v3",
+        "Standard_E64as_v4",
+        "Standard_E64d_v4",
+        "Standard_E64ds_v4",
+        "Standard_E64i_v3",
+        "Standard_E64is_v3",
+        "Standard_E64s_v3",
+        "Standard_E64s_v4",
+        "Standard_E8-2as_v4",
+        "Standard_E8-2ds_v4",
+        "Standard_E8-2s_v3",
+        "Standard_E8-2s_v4",
+        "Standard_E8-4as_v4",
+        "Standard_E8-4ds_v4",
+        "Standard_E8-4s_v3",
+        "Standard_E8-4s_v4",
+        "Standard_E80ids_v4",
+        "Standard_E80is_v4",
+        "Standard_E8_v3",
+        "Standard_E8_v4",
+        "Standard_E8a_v3",
+        "Standard_E8a_v4",
+        "Standard_E8as_v3",
+        "Standard_E8as_v4",
+        "Standard_E8d_v4",
+        "Standard_E8ds_v4",
+        "Standard_E8s_v3",
+        "Standard_E8s_v4",
+        "Standard_E96-24as_v4",
+        "Standard_E96-48as_v4",
+        "Standard_E96a_v4",
+        "Standard_E96as_v4",
+        "Standard_F1",
+        "Standard_F16",
+        "Standard_F16s",
+        "Standard_F16s_v2",
+        "Standard_F1s",
+        "Standard_F2",
+        "Standard_F2s",
+        "Standard_F2s_v2",
+        "Standard_F32s_v2",
+        "Standard_F4",
+        "Standard_F48s_v2",
+        "Standard_F4s",
+        "Standard_F4s_v2",
+        "Standard_F64s_v2",
+        "Standard_F72s_v2",
+        "Standard_F8",
+        "Standard_F8s",
+        "Standard_F8s_v2",
+        "Standard_FX12mds",
+        "Standard_FX24mds",
+        "Standard_FX36mds",
+        "Standard_FX48mds",
+        "Standard_FX4mds",
+        "Standard_G1",
+        "Standard_G2",
+        "Standard_G3",
+        "Standard_G4",
+        "Standard_G5",
+        "Standard_GS1",
+        "Standard_GS2",
+        "Standard_GS3",
+        "Standard_GS4",
+        "Standard_GS4-4",
+        "Standard_GS4-8",
+        "Standard_GS5",
+        "Standard_GS5-16",
+        "Standard_GS5-8",
+        "Standard_H16",
+        "Standard_H16_Promo",
+        "Standard_H16m",
+        "Standard_H16m_Promo",
+        "Standard_H16mr",
+        "Standard_H16mr_Promo",
+        "Standard_H16r",
+        "Standard_H16r_Promo",
+        "Standard_H8",
+        "Standard_H8_Promo",
+        "Standard_H8m",
+        "Standard_H8m_Promo",
+        "Standard_HB120-16rs_v3",
+        "Standard_HB120-32rs_v3",
+        "Standard_HB120-64rs_v3",
+        "Standard_HB120-96rs_v3",
+        "Standard_HB120rs_v2",
+        "Standard_HB120rs_v3",
+        "Standard_HB60rs",
+        "Standard_HC44rs",
+        "Standard_L16s",
+        "Standard_L16s_v2",
+        "Standard_L32s",
+        "Standard_L32s_v2",
+        "Standard_L48s_v2",
+        "Standard_L4s",
+        "Standard_L64s_v2",
+        "Standard_L80s_v2",
+        "Standard_L8s",
+        "Standard_L8s_v2",
+        "Standard_LRS",
+        "Standard_M128",
+        "Standard_M128-32ms",
+        "Standard_M128-64ms",
+        "Standard_M128dms_v2",
+        "Standard_M128ds_v2",
+        "Standard_M128m",
+        "Standard_M128ms",
+        "Standard_M128ms_v2",
+        "Standard_M128s",
+        "Standard_M128s_v2",
+        "Standard_M16-4ms",
+        "Standard_M16-8ms",
+        "Standard_M16ms",
+        "Standard_M192idms_v2",
+        "Standard_M192ids_v2",
+        "Standard_M192ims_v2",
+        "Standard_M192is_v2",
+        "Standard_M192ms_v2",
+        "Standard_M192s_v2",
+        "Standard_M208ms_v2",
+        "Standard_M208s_v2",
+        "Standard_M24ms_v2",
+        "Standard_M24s_v2",
+        "Standard_M32-16ms",
+        "Standard_M32-8ms",
+        "Standard_M32dms_v2",
+        "Standard_M32ls",
+        "Standard_M32ms",
+        "Standard_M32ms_v2",
+        "Standard_M32ts",
+        "Standard_M416-208ms_v2",
+        "Standard_M416-208s_v2",
+        "Standard_M416ms_v2",
+        "Standard_M416s_v2",
+        "Standard_M48ms_v2",
+        "Standard_M48s_v2",
+        "Standard_M64",
+        "Standard_M64-16ms",
+        "Standard_M64-32ms",
+        "Standard_M64dms_v2",
+        "Standard_M64ds_v2",
+        "Standard_M64ls",
+        "Standard_M64m",
+        "Standard_M64ms",
+        "Standard_M64ms_v2",
+        "Standard_M64s",
+        "Standard_M64s_v2",
+        "Standard_M8-2ms",
+        "Standard_M8-4ms",
+        "Standard_M8ms",
+        "Standard_M96ms_v2",
+        "Standard_M96s_v2",
+        "Standard_NC12",
+        "Standard_NC12_Promo",
+        "Standard_NC12s_v2",
+        "Standard_NC12s_v3",
+        "Standard_NC16as_T4_v3",
+        "Standard_NC24",
+        "Standard_NC24_Promo",
+        "Standard_NC24r",
+        "Standard_NC24r_Promo",
+        "Standard_NC24rs_v2",
+        "Standard_NC24rs_v3",
+        "Standard_NC24s_v2",
+        "Standard_NC24s_v3",
+        "Standard_NC4as_T4_v3",
+        "Standard_NC6",
+        "Standard_NC64as_T4_v3",
+        "Standard_NC6_Promo",
+        "Standard_NC6s_v2",
+        "Standard_NC6s_v3",
+        "Standard_NC8as_T4_v3",
+        "Standard_ND12s",
+        "Standard_ND24rs",
+        "Standard_ND24s",
+        "Standard_ND40rs_v2",
+        "Standard_ND40s_v3",
+        "Standard_ND6s",
+        "Standard_ND96asr_v4",
+        "Standard_NP10s",
+        "Standard_NP20s",
+        "Standard_NP40s",
+        "Standard_NV12",
+        "Standard_NV12_Promo",
+        "Standard_NV12s_v2",
+        "Standard_NV12s_v3",
+        "Standard_NV16as_v4",
+        "Standard_NV24",
+        "Standard_NV24_Promo",
+        "Standard_NV24s_v2",
+        "Standard_NV24s_v3",
+        "Standard_NV32as_v4",
+        "Standard_NV48s_v3",
+        "Standard_NV4as_v4",
+        "Standard_NV6",
+        "Standard_NV6_Promo",
+        "Standard_NV6s_v2",
+        "Standard_NV8as_v4",
+        "Standard_PB12s",
+        "Standard_PB24s",
+        "Standard_PB6s",
+        "Standard_ZRS"
+      ],
+      "metadata": {
+        "description": "The size of the Virtual Machine."
+      },
+      "type": "string"
+    },
+    "maxPods": {
+      "defaultValue": 30,
+      "metadata": {
+        "description": "This param has been deprecated."
+      },
+      "type": "int"
+    },
+    "mobyVersion": {
+      "allowedValues": [
+        "3.0.1",
+        "3.0.2",
+        "3.0.3",
+        "3.0.4",
+        "3.0.5",
+        "3.0.6",
+        "3.0.7",
+        "3.0.8",
+        "3.0.10",
+        "3.0.11",
+        "3.0.12",
+        "3.0.13",
+        "19.03.11",
+        "19.03.12",
+        "19.03.13",
+        "19.03.14",
+        "20.10.5",
+        "20.10.7"
+      ],
+      "defaultValue": "20.10.7",
+      "metadata": {
+        "description": "The Azure Moby build version"
+      },
+      "type": "string"
+    },
+    "nameSuffix": {
+      "defaultValue": "34759087",
+      "metadata": {
+        "description": "A string hash of the master DNS name to uniquely identify the cluster."
+      },
+      "type": "string"
+    },
+    "networkMode": {
+      "allowedValues": [
+        "",
+        "transparent",
+        "bridge"
+      ],
+      "defaultValue": "transparent",
+      "metadata": {
+        "description": "The network mode to use for CNI (transparent|bridge)"
+      },
+      "type": "string"
+    },
+    "networkPlugin": {
+      "allowedValues": [
+        "kubenet",
+        "azure",
+        "flannel",
+        "cilium",
+        "antrea"
+      ],
+      "defaultValue": "azure",
+      "metadata": {
+        "description": "The network plugin to use for Kubernetes (kubenet|azure|flannel|cilium|antrea)"
+      },
+      "type": "string"
+    },
+    "networkPolicy": {
+      "allowedValues": [
+        "",
+        "none",
+        "azure",
+        "calico",
+        "cilium",
+        "antrea"
+      ],
+      "defaultValue": "calico",
+      "metadata": {
+        "description": "The network policy enforcement to use (calico|cilium|antrea); 'none' and 'azure' here for backwards compatibility"
+      },
+      "type": "string"
+    },
+    "orchestratorName": {
+      "maxLength": 3,
+      "metadata": {
+        "description": "The orchestrator name used to identify the orchestrator.  This must be no more than 3 digits in length, otherwise it will exceed Windows Naming"
+      },
+      "minLength": 3,
+      "type": "string"
+    },
+    "osImageName": {
+      "defaultValue": "",
+      "metadata": {
+        "description": "Name of a Linux OS image. Needs to be used in conjuction with osImageResourceGroup."
+      },
+      "type": "string"
+    },
+    "osImageOffer": {
+      "defaultValue": "UbuntuServer",
+      "metadata": {
+        "description": "Linux OS image type."
+      },
+      "type": "string"
+    },
+    "osImagePublisher": {
+      "defaultValue": "Canonical",
+      "metadata": {
+        "description": "OS image publisher."
+      },
+      "type": "string"
+    },
+    "osImageResourceGroup": {
+      "defaultValue": "",
+      "metadata": {
+        "description": "Resource group of a Linux OS image. Needs to be used in conjuction with osImageName."
+      },
+      "type": "string"
+    },
+    "osImageSKU": {
+      "defaultValue": "16.04-LTS",
+      "metadata": {
+        "description": "OS image SKU."
+      },
+      "type": "string"
+    },
+    "osImageVersion": {
+      "defaultValue": "latest",
+      "metadata": {
+        "description": "OS image version."
+      },
+      "type": "string"
+    },
+    "sshRSAPublicKey": {
+      "metadata": {
+        "description": "SSH public key used for auth to all Linux machines.  Not Required.  If not set, you must provide a password key."
+      },
+      "type": "string"
+    },
+    "targetEnvironment": {
+      "defaultValue": "AzurePublicCloud",
+      "metadata": {
+        "description": "The azure deploy environment. Currently support: AzurePublicCloud, AzureChinaCloud"
+      },
+      "type": "string"
+    },
+    "vnetCidr": {
+      "defaultValue": "10.0.0.0/8",
+      "metadata": {
+        "description": "Cluster vnet cidr"
+      },
+      "type": "string"
+    },
+    "vnetCidrIPv6": {
+      "defaultValue": "2001:1234:5678:9a00::/56",
+      "metadata": {
+        "description": "Cluster vnet cidr IPv6"
+      },
+      "type": "string"
+    },
+    "vnetCniLinuxPluginsURL": {
+      "defaultValue": "https://kubernetesartifacts.azureedge.net/azure-cni/v1.0.30/binaries/azure-vnet-cni-linux-amd64-v1.0.30.tgz",
+      "type": "string"
+    },
+    "vnetCniWindowsPluginsURL": {
+      "defaultValue": "https://kubernetesartifacts.azureedge.net/azure-cni/v1.0.30/binaries/azure-vnet-cni-windows-amd64-v1.0.30.zip",
+      "type": "string"
+    }
+  },
+  "variables": {
+    "agentLbBackendPoolName": "[parameters('masterEndpointDNSNamePrefix')]",
+    "agentLbID": "[resourceId('Microsoft.Network/loadBalancers',variables('agentLbName'))]",
+    "agentLbIPConfigID": "[concat(variables('agentLbID'),'/frontendIPConfigurations/', variables('agentLbIPConfigName'))]",
+    "agentLbIPConfigName": "[concat(parameters('orchestratorName'), '-agent-outbound')]",
+    "agentLbName": "[parameters('masterEndpointDNSNamePrefix')]",
+    "agentPublicIPAddressName": "[concat(parameters('orchestratorName'), '-agent-ip-outbound')]",
+    "agentpool1Count": "[parameters('agentpool1Count')]",
+    "agentpool1Index": 0,
+    "agentpool1SubnetName": "[variables('subnetName')]",
+    "agentpool1SubnetResourceGroup": "[split(variables('agentpool1VnetSubnetID'), '/')[4]]",
+    "agentpool1VMNamePrefix": "k8s-agentpool1-34759087-vmss",
+    "agentpool1VMSize": "[parameters('agentpool1VMSize')]",
+    "agentpool1Vnet": "[split(variables('agentpool1VnetSubnetID'), '/')[8]]",
+    "agentpool1VnetSubnetID": "[variables('vnetSubnetID')]",
+    "agentpool1osImageName": "[parameters('agentpool1osImageName')]",
+    "agentpool1osImageOffer": "[parameters('agentpool1osImageOffer')]",
+    "agentpool1osImagePublisher": "[parameters('agentpool1osImagePublisher')]",
+    "agentpool1osImageResourceGroup": "[parameters('agentpool1osImageResourceGroup')]",
+    "agentpool1osImageSKU": "[parameters('agentpool1osImageSKU')]",
+    "agentpool1osImageVersion": "[parameters('agentpool1osImageVersion')]",
+    "alwaysPullWindowsPauseImage": "false",
+    "apiVersionAuthorizationSystem": "2018-09-01-preview",
+    "apiVersionAuthorizationUser": "2018-09-01-preview",
+    "apiVersionCompute": "2019-07-01",
+    "apiVersionDeployments": "2018-06-01",
+    "apiVersionKeyVault": "2019-09-01",
+    "apiVersionManagedIdentity": "2018-11-30",
+    "apiVersionNetwork": "2018-08-01",
+    "apiVersionStorage": "2018-07-01",
+    "applicationInsightsKey": "c92d8284-b550-4b06-b7ba-e80fd7178faa",
+    "cloudInitFiles": {
+      "customSearchDomainsScript": "H4sIAAAAAAAA/3yQP2/bQAzF9/sUrN2hHU4nGzC6tkOzZsqSRaBOtHTR6SiQdBwZ+fCBIwNBgCALAb73wD+/7Y/QphJa1MEpGfgXp3ySSBB4toCXk1CIXAxTIdEwCz8nTVyaNVbp4BzFgWED0BX1SihxgA28ghGBRwhkMRSyM8sYUjGSI0bSqguH2sfMp86nkqyKx97pokZTtNwIqaEY7Gs4wK6G24BUenfGZM2RpcHZmsxxVCdkssSpuyYPsNvXgLP5/vrQAqmoYc4ghHnqQFXX4o05KyhOLfrI08RlbT5L82IDl3315ybn1CrMGEfsaUz21TkrkCuD953wxKmAf4C/P399WCYQ0F8ChH/+MfyGbzy3/X9/594CAAD//x81gP2sAQAA",
+      "dhcpv6ConfigurationScript": "H4sIAAAAAAAA/3RRT2vbThC9z6d4P8U4vx7WsgvxpWmgKFIqaiQIDr0UhKwdRUvVXVW76wQcffeiCBXaOpcd5jHvz85c/Bd624cHpUPWRxxK2xBZdhA8FYNOdVyXqp16T3T7OdqlcbbfFlGeJUWS7uKPIbsqlE3VjU+rWLvtqjK6pmiXP9wWaZbuiyi5m+Y0uyfTfw+VdtzXZcV2JcOrtaha46VQWrlVVT8S9VxKiB5C4vISWbz/mt9/eTVN7x7uP+3TPMP1dZxHeHmB6z2TGtXArllDaXZblN4ZAgDfwbbMHa7mdg4KsYHYQlQ13voFRFsjPJZ92KrD3wOj26rl0rKFOE7mc544j4hKKQtVF9q4gp+Vdfb/dzgR8NhzB/HzOUGwOG2GYCzvh2Akc9WYGb25mXAaiJzxVfN2zOUS/5ghcOoHG++wWX8IsDidOd8wMr8RzrEXp7OLH0apP4/7W8V6aaBqaZ70tI7lcsZ894rQRZwn9CsAAP//3eGEyH0CAAA=",
+      "dhcpv6SystemdService": "H4sIAAAAAAAA/zTNsc6CMBAH8P1e45uh27d10IiJkwMaB8JQy19prNfmeqD49A7EJ/h1Zw7a0w7FS8gaEluwu0YMo8/zP21uCrEMfSV5VIljYNTq5A4l6lrIHDx6Oi0ZNjHKmJSaN3yrTtSalNW4zyQwPrG6wJBiVqBahbqMRN2Bi7oYe7o4VgzbxT6nqKGaCuTH/TXHPX0DAAD//wVR54mwAAAA",
+      "dockerMonitorSystemdService": "H4sIAAAAAAAA/zSOwUrDQBCG7/sUC56T6APsoeoKOZhC0uIhBBk3UzN0Myuzk9q8vdDY2zcw//f//ZFJB/OKOQj9KCV2YDe2OoHaMGE4ZzumcEaxE0LUyQKPVjAriGZLJ8uII45md1IUt72WGeVCAU3fbTCYdks4iL+w5vvZYXBPj6bFGYhvBn8ldStm4/lCknhGVveybw67uvHtZ3tsDvW7/+8x/oqhu3mrJUsVU4BYfRFX29ZiTkyapMyTDYkViFEKWVhpRtPXnBViHMwHsOL4vLp5iUrFklFKBflGNQ9+/2b+AgAA//9HkzLkKQEAAA==",
+      "etcdMonitorSystemdService": "H4sIAAAAAAAA/zSOsUrFQBBF+/mKBeuX6AdsoRjBSnhBLEKKcXOfO7jZyMxEX/5eTLC7F86BM7xW8ZEeYUnly2WpkcOxg2f2kDLSpwV4mkIGF8+B6xQU5qxuQS6hAhMmur84NP6BjUG/JYGG/hgjnQ8+cvnhzf5vjxTvbumMmaXufncVjxuMuitSvyvtatqWJXFp36W2R8RpXqr4oo3lvY2G52rOpYz0xtUxPWxxXovLaTVo46wfcLrpXp7oNwAA//+L4/L48wAAAA==",
+      "etcdSystemdService": "H4sIAAAAAAAA/4SRPY/bMAyGd/0KDb1R0X6ABrd22xvuA0kOHYIgkG0mJiJTLkX56n9fWOihTTt0JZ9H4Pvq8EooR1VD6hgnwUgOpOu10QNehrAYP3sMvg2gr7Do2YcMOklkUHXs8ggkvliDyJTurb2gDLnddHG0XWSIya7v/QWPnu7LuDoLsCOQt8jXjXi+gOjZswnYmpXoMV03Y8wk6psnSe+siRSQ4D/KYQc8YwdH1dCMHGk9wdVV8/j8dKq2X3buZtHsP9Wnp+qxcXdf/13U1b461Q/bG+czBnBmzWh7OPscxN5Nar9M4CgKnhf1moBLp+oFeMSUMFLaiWd5prA44Qyq+QFdGb0wONsi2XL/FJFEm+/azp5twNa+5/ttOJsTF6X824c/wqktpIL48OaXpA4PlMSHcCxVQv9xcWMOgiYn4F9Nqp8BAAD//xtfqZERAgAA",
+      "healthMonitorScript": "H4sIAAAAAAAA/6xW0W7bNhR951fcqMLQPsi0UqDd3ClAUBiLsS4NbGcPKwpDoa4rwhIpkJTbVNG/DxRl2YodJ0uWl1jCOefee3hI6tUJLbWiN1xQFGu4iXVKtCwVQ6CyMDT+WSqkTAoTc4FK00LJNddcioWDDXRKiEYDgQQhS6HRbB4LXuAy5hkhHX+hSmF4jotcCm6k4uLb6zdQEQCdIRbwdjgEApBJFmfAFF+IOMfI86uPny/n55PL8XQxvb6cT/4aj4JEshWq2gOWJ5HnnqDQHgHgS/jyBQ6waogi8Lp2Eg++fv0AJkVBAMApMaMgELD6VQ+4hO3okDXaS04IwPeUZwhGlfgBEtmQ+RJOwA4nSwPvhuBXLE9qOKMJrqkos2ynEACyVIL3caMOrTGW1Y5dgzUPkxOvpTiLwsah/16wc2Wj31jhbLtng/srVjzLIJhN/rieTUNwyKQDLPlR4Qc9Pii+RR/S17faYM5MBo4V2H/B91RGecwFeDueeVtS49a7zq3Wr60W10HMDF/3PN9rdIvXJlZmF7vfavsDM429NfP8avZpPL5aNBl0PTbYRAokNSGr8gYzNE/aFnn8Y6GRSZHoKByCLE1RmsjztgAnsnBpLlUGQQ5+tcOrIVhCoCGYQWpMMaI0PH0/GA6Gg3DkVxfj80/zi3+uPk/nNU0xzkz60zuS+bYD/7Vf7ZSu4fTsl/DNfuh9h+/tgz/d/MA1lMKVvD2e+6cX3ctPa/ZzktJSH03J/RIvTwgalvw/8UCRFJILE3l27fWIUr+6mk7+Pp+PF5OrenT69v1vR8PU5OZApAIWM1QGKBpGrQNKoEFN7UtNWTxgyljUwxg7JMs4CtNiV3j7ONSC/GozVk3XpzSPWcoF6mfE9omJtfVfHtdHkmqLPCemlvdoRnviLw9oewm8gkAghLtnvjPsWsffcATOraA1YaBT+L07/IP2Erxrt8+dbfHM1sIf3EBI7N277SIKh4TJvJAChYn8kLhCs24HusC0JWG7eWAplT3IN9za69rfedm/xja99W6zY981BLMHNNvpekr7F8DDfOtKj3zvbCDt4jk7Lg5O30n25bkGIQ3osiikMs23x5KTfwMAAP//B/dbSSUKAAA=",
+      "kubeletMonitorSystemdService": "H4sIAAAAAAAA/zSOQUvDQBCF7/MrFjy3acWDlz1UjFQQKklFMOQw3UzN0M2s7Exq8++Fxt6+gXnvfc2HsLXwTBoy/xgn8ehmdtajudBTOKk7jQeKZK4njNY7lM5lUsNs6vjohKijDjZHo+z/f5dK+cyBoKlnaKGUM+ckA4n5bbl522+/3nfV3q9X9w+PUM2FHuMvTno7awp+vYKKBmS5DpQXNj+RQnmhUF8jxai5iClgLA4sxWy5GJKwpbzU/uYPzauoYYwtfKIYdU+TH8ZovBiV8tIwf5PBXbl7gb8AAAD//3MkF98aAQAA",
+      "kubeletSystemdService": "H4sIAAAAAAAA/3SPwU4CMRCG730KQrgujdFrDwLFEAgQVuIBCZntjjKhtNiZImh8d4OCenFOk8n/fZl/MQ8kS9VDdol2QjGYYa7Qo6huDDWdLlOQtT0QCxudOWkfHXhdUdCbc3SGL5kSsqmj22BqM6Y9OVRqUX5vSzVDFkhiwL/CkZUNe0oxbDFInzwajeJ0jU+Qvfxoy+wcMtsDSSkgmc3VzbWyB3TlyTVNaL7eqIDXDR13ouEtJ9QuBgEKmPiiavP6l/unReNRNc5TFCHWWHio0LNptt6H844d2fvVeNKzq9Ftx47Kj+YfoHUJdCfj/uBOLQaBBbxfqgcIgnXnaLbZCxWZMbUF0jOK+gwAAP//xbtnxXwBAAA=",
+      "provisionConfigs": "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",
+      "provisionInstalls": "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",
+      "provisionScript": "H4sIAAAAAAAA/7RYbW/bOBL+zl8xqxp5wVZWvHsbZLFIAa2tbHxxbJ9st3dXBIIsjmwiMqmSVF6a5r8fKFmKbCut27v7Jo5nhvNwnhly/OYnZ864Mw/Vkni+H1z0B17wwZ12L4Np/9obzabnp0AIkSuw/Rgc1JETptpRIpMRqnbClG5Th4k7poTMl4Qo1GA/EBbDR7BjcESqnfBzJtGJBNch4yiVk0pjwwRvR2KVJqgRbv4AvUROAPCBaTghMSMEo6WA1hENNR6/bR0thdI8XOHxW1A6lDrKlBYrFUmWanj3Lt9rRUgsJDBgHFpHCj9BB349PTk5/gOoIABFYOpbgQUFyLZa1iIDWEhMwb74BIdvLr3B2PMn3uji8DucHRzAXGJ4SwBiVobTYmDjpzzMjd3ykzg1R5IozCUqQUyhU1hTwZEopGAzsJxaQA619g+JFF/fYRAJHrNFJjFIJUr8lDHFNCpC7kOmg1jIIGYJFnA63/TLuNJhkihzOl++lJj3DKpmTAhylUl0x9f/BuvupP1bu2MRvAsTsFpHYbr6DIbpYNNji/xgrAXyHwv1xbYokp8fiDft9oKx5/lB1/On562jgu9Pm/L+Rb/rTr3JM3yBKNNg08OPh6a2fnkR3OSCzovgbS5oHR0NRz0v6A973j/hZ+gcHx/Xdr3y/tW06djvv3ennvn5f7bpui0QzVYYrFBLFoHVLYnk0hXjM4XSgmhHtmWTYMiztFseMbUgMqJZTUQAGo3+Gs96kt2hVJXRi8gYEfL+shcMRn9N8mY4dqeX57W83i2pvWZc1biqTtfaMa3V8m40tXj7q3CBahdHIScAF7PBIOgPJ1N3MAh87x+zvu/1zuPQdIV1azBRfITWU38SvL/sPcP5OWiZIdzs9JPO2WnZfJr9Gru8+5Y+Z3/OhtNZ4HsDz514uW+rc9Y++ZtVd89iCFMN5hYAuzwmpPClaJqH0VIK/nhYC6eZC91cr0aEQrBr4eXlXqpjbVXgq0EYTUzQrTWQ0SQYutdePfgGx25Gme6VjovVls+fzqF1MXCnXdffdbrhcn0c12L+aEFtQRrV/IxHlZpZ1Pa1ObSert3J1PMDU2bPcHNjbhXz02doPXVHk+vRJJj5/ec6wChhgRYiObeoiG5RWobuW7j7xYaejmi1u1lAq7TO4yBNRkPU90LejpNswXhlvSFtNrzK5pigdjk1X5FOKuOdX/Y++leo4o+7ZTr9cfdVQknBKzpJwXPMm1SVGGo0QV2HnMWodI+ZztUkJv9l3pprxGRlq12Wom9QpXLckP/K/QQjiVrVvK8lRf7/T4C2wJSdbcPAx5W4W2vL6tuE1ZDJXsH0dS6L1TZ9qwiuzup4r87Ua4rdYb/enIb9vY67wZdLqeDVpsVqW/ODZAWlChML7jcFRUK2QRXw1/VT4l8vG1X/LjLJw6RUXS/3AsZiMLeneeEsNELr6Wr2p+cPvak3Cd57/qQ/Gj5Dp905/XptDsI5JkNBzT2IW5L6W/nr5Gp0XbAFq+/SXdORnSlz+0qRjJOQY3V0m+JX7ot1OrG2Mukx01NteApT3TYZb1Pn999TlExQFv3YPTXO5ALdVFvm4g0WqIPUSCBMw2iJv9iZZomCg5wjpUaWmmHK1GnGQ62RU6RBli5kSJG8TG13oXRkxh2JcyG0nT/yJdL6i0aGEQaMx8JUpdHy10oWWIVZ/pIwF001ZoIdgaWWmabinoMtoQMH1svr5ZvwwSBdhfL2gztgPHtwF8g1ZHwpEgoHRWI3HkQ5WV6jLoB6VBpXkU4CiflECZ2TE/gNfj2B23W57KdmrwRnWshNqu4DyMmUdBI2r8hRbEbbNGTJYw5qH9TVtGx1Jx7EjDO1RAoqiyJUKs6S5NH6yjiNnDYP06tbyiTYafN4Y3ikRRYt957zSaogzB7i+3t4V7OpFO1UtROxgANC1v8DkDfe6IL8JwAA//+Jy/lErBAAAA==",
+      "provisionSource": "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"
+    },
+    "clusterKeyVaultName": "",
+    "contributorRoleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', 'b24988ac-6180-42a0-ab88-20f7382dd24c')]",
+    "customCloudAuthenticationMethod": "client_secret",
+    "customCloudIdentifySystem": "azure_ad",
+    "enableHostsConfigAgent": false,
+    "enableTelemetry": false,
+    "etcdCaFilepath": "/etc/kubernetes/certs/ca.crt",
+    "etcdClientCertFilepath": "/etc/kubernetes/certs/etcdclient.crt",
+    "etcdClientKeyFilepath": "/etc/kubernetes/certs/etcdclient.key",
+    "etcdPeerCertFilepath": [
+      "/etc/kubernetes/certs/etcdpeer0.crt",
+      "/etc/kubernetes/certs/etcdpeer1.crt",
+      "/etc/kubernetes/certs/etcdpeer2.crt",
+      "/etc/kubernetes/certs/etcdpeer3.crt",
+      "/etc/kubernetes/certs/etcdpeer4.crt"
+    ],
+    "etcdPeerCertificates": [
+      "[parameters('etcdPeerCertificate0')]"
+    ],
+    "etcdPeerKeyFilepath": [
+      "/etc/kubernetes/certs/etcdpeer0.key",
+      "/etc/kubernetes/certs/etcdpeer1.key",
+      "/etc/kubernetes/certs/etcdpeer2.key",
+      "/etc/kubernetes/certs/etcdpeer3.key",
+      "/etc/kubernetes/certs/etcdpeer4.key"
+    ],
+    "etcdPeerPrivateKeys": [
+      "[parameters('etcdPeerPrivateKey0')]"
+    ],
+    "etcdServerCertFilepath": "/etc/kubernetes/certs/etcdserver.crt",
+    "etcdServerKeyFilepath": "/etc/kubernetes/certs/etcdserver.key",
+    "excludeMasterFromStandardLB": "true",
+    "kubeconfigServer": "[concat('https://', variables('masterFqdnPrefix'), '.', variables('location'), '.', parameters('fqdnEndpointSuffix'))]",
+    "kubernetesAPIServerIP": "[parameters('firstConsecutiveStaticIP')]",
+    "labelResourceGroup": "[if(or(or(endsWith(variables('truncatedResourceGroup'), '-'), endsWith(variables('truncatedResourceGroup'), '_')), endsWith(variables('truncatedResourceGroup'), '.')), concat(take(variables('truncatedResourceGroup'), 62), 'z'), variables('truncatedResourceGroup'))]",
+    "loadBalancerSku": "Standard",
+    "location": "[variables('locations')[mod(add(2,length(parameters('location'))),add(1,length(parameters('location'))))]]",
+    "locations": [
+      "[resourceGroup().location]",
+      "[parameters('location')]"
+    ],
+    "masterAvailabilitySet": "[concat('master-availabilityset-', parameters('nameSuffix'))]",
+    "masterCount": 1,
+    "masterEtcdClientPort": 2379,
+    "masterEtcdClientURLs": [
+      "[concat('https://', variables('masterPrivateIpAddrs')[0], ':', variables('masterEtcdClientPort'))]",
+      "[concat('https://', variables('masterPrivateIpAddrs')[1], ':', variables('masterEtcdClientPort'))]",
+      "[concat('https://', variables('masterPrivateIpAddrs')[2], ':', variables('masterEtcdClientPort'))]",
+      "[concat('https://', variables('masterPrivateIpAddrs')[3], ':', variables('masterEtcdClientPort'))]",
+      "[concat('https://', variables('masterPrivateIpAddrs')[4], ':', variables('masterEtcdClientPort'))]"
+    ],
+    "masterEtcdClusterStates": [
+      "[concat(variables('masterVMNames')[0], '=', variables('masterEtcdPeerURLs')[0])]",
+      "[concat(variables('masterVMNames')[0], '=', variables('masterEtcdPeerURLs')[0], ',', variables('masterVMNames')[1], '=', variables('masterEtcdPeerURLs')[1], ',', variables('masterVMNames')[2], '=', variables('masterEtcdPeerURLs')[2])]",
+      "[concat(variables('masterVMNames')[0], '=', variables('masterEtcdPeerURLs')[0], ',', variables('masterVMNames')[1], '=', variables('masterEtcdPeerURLs')[1], ',', variables('masterVMNames')[2], '=', variables('masterEtcdPeerURLs')[2], ',', variables('masterVMNames')[3], '=', variables('masterEtcdPeerURLs')[3], ',', variables('masterVMNames')[4], '=', variables('masterEtcdPeerURLs')[4])]"
+    ],
+    "masterEtcdMetricURLs": [
+      "[concat('http://', variables('masterPrivateIpAddrs')[0], ':2480')]",
+      "[concat('http://', variables('masterPrivateIpAddrs')[1], ':2480')]",
+      "[concat('http://', variables('masterPrivateIpAddrs')[2], ':2480')]",
+      "[concat('http://', variables('masterPrivateIpAddrs')[3], ':2480')]",
+      "[concat('http://', variables('masterPrivateIpAddrs')[4], ':2480')]"
+    ],
+    "masterEtcdPeerURLs": [
+      "[concat('https://', variables('masterPrivateIpAddrs')[0], ':', variables('masterEtcdServerPort'))]",
+      "[concat('https://', variables('masterPrivateIpAddrs')[1], ':', variables('masterEtcdServerPort'))]",
+      "[concat('https://', variables('masterPrivateIpAddrs')[2], ':', variables('masterEtcdServerPort'))]",
+      "[concat('https://', variables('masterPrivateIpAddrs')[3], ':', variables('masterEtcdServerPort'))]",
+      "[concat('https://', variables('masterPrivateIpAddrs')[4], ':', variables('masterEtcdServerPort'))]"
+    ],
+    "masterEtcdServerPort": 2380,
+    "masterFirstAddrComment": "these MasterFirstAddrComment are used to place multiple masters consecutively in the address space",
+    "masterFirstAddrOctet4": "[variables('masterFirstAddrOctets')[3]]",
+    "masterFirstAddrOctets": "[split(parameters('firstConsecutiveStaticIP'),'.')]",
+    "masterFirstAddrPrefix": "[concat(variables('masterFirstAddrOctets')[0],'.',variables('masterFirstAddrOctets')[1],'.',variables('masterFirstAddrOctets')[2],'.')]",
+    "masterFqdnPrefix": "reem-aks-group2",
+    "masterLbBackendPoolName": "[concat(parameters('orchestratorName'), '-master-pool-', parameters('nameSuffix'))]",
+    "masterLbID": "[resourceId('Microsoft.Network/loadBalancers',variables('masterLbName'))]",
+    "masterLbIPConfigID": "[concat(variables('masterLbID'),'/frontendIPConfigurations/', variables('masterLbIPConfigName'))]",
+    "masterLbIPConfigName": "[concat(parameters('orchestratorName'), '-master-lbFrontEnd-', parameters('nameSuffix'))]",
+    "masterLbName": "[concat(parameters('orchestratorName'), '-master-lb-', parameters('nameSuffix'))]",
+    "masterOffset": "[parameters('masterOffset')]",
+    "masterPrivateIpAddrs": [
+      "[concat(variables('masterFirstAddrPrefix'), add(0, int(variables('masterFirstAddrOctet4'))))]",
+      "[concat(variables('masterFirstAddrPrefix'), add(1, int(variables('masterFirstAddrOctet4'))))]",
+      "[concat(variables('masterFirstAddrPrefix'), add(2, int(variables('masterFirstAddrOctet4'))))]",
+      "[concat(variables('masterFirstAddrPrefix'), add(3, int(variables('masterFirstAddrOctet4'))))]",
+      "[concat(variables('masterFirstAddrPrefix'), add(4, int(variables('masterFirstAddrOctet4'))))]"
+    ],
+    "masterPublicIPAddressName": "[concat(parameters('orchestratorName'), '-master-ip-', variables('masterFqdnPrefix'), '-', parameters('nameSuffix'))]",
+    "masterVMNamePrefix": "k8s-master-34759087-",
+    "masterVMNames": [
+      "[concat(variables('masterVMNamePrefix'), '0')]",
+      "[concat(variables('masterVMNamePrefix'), '1')]",
+      "[concat(variables('masterVMNamePrefix'), '2')]",
+      "[concat(variables('masterVMNamePrefix'), '3')]",
+      "[concat(variables('masterVMNamePrefix'), '4')]"
+    ],
+    "maxVMsPerPool": 100,
+    "maximumLoadBalancerRuleCount": 250,
+    "networkContributorRoleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '4d97b98b-1d4f-4787-a291-c67834d212e7')]",
+    "nsgID": "[resourceId('Microsoft.Network/networkSecurityGroups',variables('nsgName'))]",
+    "nsgName": "[concat(variables('masterVMNamePrefix'), 'nsg')]",
+    "orchestratorNameVersionTag": "Kubernetes:1.20.11",
+    "primaryAvailabilitySetName": "",
+    "primaryScaleSetName": "k8s-agentpool1-34759087-vmss",
+    "provisionScriptParametersCommon": "[concat('ADMINUSER=azureuser APISERVER_PUBLIC_KEY=',parameters('apiServerCertificate'),' AUTHENTICATION_METHOD=client_secret CLOUDPROVIDER_BACKOFF=true CLOUDPROVIDER_BACKOFF_DURATION=5 CLOUDPROVIDER_BACKOFF_EXPONENT=0 CLOUDPROVIDER_BACKOFF_JITTER=0 CLOUDPROVIDER_BACKOFF_MODE=v2 CLOUDPROVIDER_BACKOFF_RETRIES=6 CLOUDPROVIDER_RATELIMIT=true CLOUDPROVIDER_RATELIMIT_BUCKET=1000 CLOUDPROVIDER_RATELIMIT_BUCKET_WRITE=1000 CLOUDPROVIDER_RATELIMIT_QPS=100 CLOUDPROVIDER_RATELIMIT_QPS_WRITE=100 CNI_PLUGINS_URL=https://kubernetesartifacts.azureedge.net/cni-plugins/v0.9.1/binaries/cni-plugins-linux-amd64-v0.9.1.tgz CONTAINERD_DOWNLOAD_URL_BASE=https://storage.googleapis.com/cri-containerd-release/ CONTAINERD_VERSION=1.4.6 CONTAINER_RUNTIME=docker CUSTOM_HYPERKUBE_IMAGE= ENABLE_MULTIPLE_STANDARD_LOAD_BALANCERS=false ETCD_DOWNLOAD_URL=mcr.microsoft.com/oss/etcd-io/ ETCD_VERSION=3.3.25 EXCLUDE_MASTER_FROM_STANDARD_LB=true HYPERKUBE_URL=mcr.microsoft.com/ IDENTITY_SYSTEM=azure_ad IS_IPV6_ENABLED=false KMS_PROVIDER_VAULT_NAME=',variables('clusterKeyVaultName'),' KUBELET_PRIVATE_KEY=',parameters('clientPrivateKey'),' KUBERNETES_VERSION=1.20.11 KUBE_BINARY_URL= LOAD_BALANCER_DISABLE_OUTBOUND_SNAT=false LOAD_BALANCER_SKU=Standard LOCATION=',variables('location'),' MAXIMUM_LOADBALANCER_RULE_COUNT=250 MOBY_VERSION=20.10.7 MS_APT_REPO=https://packages.microsoft.com NETWORK_API_VERSION=2018-08-01 NETWORK_MODE=transparent NETWORK_PLUGIN=azure NETWORK_POLICY=calico NETWORK_SECURITY_GROUP=k8s-master-34759087-nsg PRIMARY_AVAILABILITY_SET= PRIMARY_SCALE_SET=k8s-agentpool1-34759087-vmss RESOURCE_GROUP=',variables('resourceGroup'),' ROUTE_TABLE=k8s-master-34759087-routetable SERVICE_PRINCIPAL_CLIENT_ID=',variables('servicePrincipalClientId'),' SERVICE_PRINCIPAL_CLIENT_SECRET=',variables('singleQuote'),'',variables('servicePrincipalClientSecret'),'',variables('singleQuote'),' SUBNET=k8s-subnet SUBSCRIPTION_ID=',variables('subscriptionId'),' TAGS= TENANT_ID=',variables('tenantID'),' USE_INSTANCE_METADATA=true USE_MANAGED_IDENTITY_EXTENSION=true VIRTUAL_NETWORK=k8s-vnet-34759087 VIRTUAL_NETWORK_RESOURCE_GROUP= VM_TYPE=vmss VNET_CNI_PLUGINS_URL=https://kubernetesartifacts.azureedge.net/azure-cni/v1.4.12/binaries/azure-vnet-cni-linux-amd64-v1.4.12.tgz ')]",
+    "provisionScriptParametersMaster": "[concat('COSMOS_URI= MASTER_VM_NAME=',variables('masterVMNames')[variables('masterOffset')],' ETCD_PEER_URL=',variables('masterEtcdPeerURLs')[variables('masterOffset')],' ETCD_CLIENT_URL=',variables('masterEtcdClientURLs')[variables('masterOffset')],' MASTER_NODE=true NO_OUTBOUND=false AUDITD_ENABLED=false CLUSTER_AUTOSCALER_ADDON=false APISERVER_PRIVATE_KEY=',parameters('apiServerPrivateKey'),' CA_CERTIFICATE=',parameters('caCertificate'),' CA_PRIVATE_KEY=',parameters('caPrivateKey'),' MASTER_FQDN=',variables('masterFqdnPrefix'),' KUBECONFIG_CERTIFICATE=',parameters('kubeConfigCertificate'),' KUBECONFIG_KEY=',parameters('kubeConfigPrivateKey'),' ETCD_SERVER_CERTIFICATE=',parameters('etcdServerCertificate'),' ETCD_CLIENT_CERTIFICATE=',parameters('etcdClientCertificate'),' ETCD_SERVER_PRIVATE_KEY=',parameters('etcdServerPrivateKey'),' ETCD_CLIENT_PRIVATE_KEY=',parameters('etcdClientPrivateKey'),' ETCD_PEER_CERTIFICATES=',string(variables('etcdPeerCertificates')),' ETCD_PEER_PRIVATE_KEYS=',string(variables('etcdPeerPrivateKeys')),' ENABLE_AGGREGATED_APIS=',string(parameters('enableAggregatedAPIs')),' KUBECONFIG_SERVER=',variables('kubeconfigServer'))]",
+    "readerRoleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
+    "resourceGroup": "[resourceGroup().name]",
+    "routeTableID": "[resourceId('Microsoft.Network/routeTables', variables('routeTableName'))]",
+    "routeTableName": "[concat(variables('masterVMNamePrefix'),'routetable')]",
+    "scope": "[resourceGroup().id]",
+    "servicePrincipalClientId": "msi",
+    "servicePrincipalClientSecret": "msi",
+    "singleQuote": "'",
+    "sshKeyPath": "[concat('/home/',parameters('linuxAdminUsername'),'/.ssh/authorized_keys')]",
+    "sshNatPorts": [
+      22,
+      2201,
+      2202,
+      2203,
+      2204
+    ],
+    "storageAccountBaseName": "",
+    "storageAccountPrefixes": [],
+    "subnetName": "k8s-subnet",
+    "subscriptionId": "[subscription().subscriptionId]",
+    "tenantId": "[subscription().tenantId]",
+    "truncatedResourceGroup": "[take(replace(replace(resourceGroup().name, '(', '-'), ')', '-'), 63)]",
+    "useInstanceMetadata": "true",
+    "useManagedIdentityExtension": "true",
+    "userAssignedClientID": "",
+    "userAssignedID": "",
+    "userAssignedIDReference": "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', variables('userAssignedID'))]",
+    "virtualNetworkName": "[concat(parameters('orchestratorName'), '-vnet-', parameters('nameSuffix'))]",
+    "virtualNetworkResourceGroupName": "''",
+    "vmType": "vmss",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+    "vnetNameResourceSegmentIndex": 8,
+    "vnetResourceGroupNameResourceSegmentIndex": 4,
+    "vnetSubnetID": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+    "windowsCSIProxyURL": "",
+    "windowsEnableCSIProxy": false,
+    "windowsPauseImageURL": "",
+    "windowsProvisioningScriptsPackageURL": "",
+    "windowsSecureTLSEnabled": "false"
+  },
+  "resources": [
+    {
+      "apiVersion": "[variables('apiVersionNetwork')]",
+      "location": "[variables('location')]",
+      "name": "[variables('agentPublicIPAddressName')]",
+      "properties": {
+        "publicIPAllocationMethod": "Static"
+      },
+      "sku": {
+        "name": "[variables('loadBalancerSku')]"
+      },
+      "tags": null,
+      "type": "Microsoft.Network/publicIPAddresses"
+    },
+    {
+      "apiVersion": "[variables('apiVersionNetwork')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('agentPublicIPAddressName'))]"
+      ],
+      "location": "[variables('location')]",
+      "name": "[variables('agentLbName')]",
+      "properties": {
+        "backendAddressPools": [
+          {
+            "name": "[variables('agentLbBackendPoolName')]"
+          }
+        ],
+        "frontendIPConfigurations": [
+          {
+            "name": "[variables('agentLbIPConfigName')]",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIpAddresses',variables('agentPublicIPAddressName'))]"
+              }
+            }
+          }
+        ],
+        "outboundRules": [
+          {
+            "name": "LBOutboundRule",
+            "properties": {
+              "allocatedOutboundPorts": 0,
+              "backendAddressPool": {
+                "id": "[concat(variables('agentLbID'), '/backendAddressPools/', variables('agentLbBackendPoolName'))]"
+              },
+              "enableTcpReset": true,
+              "frontendIPConfigurations": [
+                {
+                  "id": "[variables('agentLbIPConfigID')]"
+                }
+              ],
+              "idleTimeoutInMinutes": 30,
+              "protocol": "All"
+            }
+          }
+        ]
+      },
+      "sku": {
+        "name": "[variables('loadBalancerSku')]"
+      },
+      "tags": null,
+      "type": "Microsoft.Network/loadBalancers"
+    },
+    {
+      "apiVersion": "[variables('apiVersionAuthorizationSystem')]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachineScaleSets/', variables('agentpool1VMNamePrefix'))]"
+      ],
+      "name": "[guid(concat('Microsoft.Compute/virtualMachineScaleSets/', variables('agentpool1VMNamePrefix'), 'vmidentity'))]",
+      "properties": {
+        "principalId": "[reference(concat('Microsoft.Compute/virtualMachineScaleSets/', variables('agentpool1VMNamePrefix')), '2017-03-30', 'Full').identity.principalId]",
+        "principalType": "ServicePrincipal",
+        "roleDefinitionId": "[variables('readerRoleDefinitionId')]"
+      },
+      "type": "Microsoft.Authorization/roleAssignments"
+    },
+    {
+      "apiVersion": "[variables('apiVersionCompute')]",
+      "dependsOn": [
+        "[variables('vnetID')]",
+        "[variables('agentLbID')]"
+      ],
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "[variables('location')]",
+      "name": "[variables('agentpool1VMNamePrefix')]",
+      "properties": {
+        "overprovision": false,
+        "singlePlacementGroup": false,
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
+        "virtualMachineProfile": {
+          "extensionProfile": {
+            "extensions": [
+              {
+                "name": "vmssCSE",
+                "properties": {
+                  "autoUpgradeMinorVersion": true,
+                  "protectedSettings": {
+                    "commandToExecute": "[concat('echo $(date),$(hostname); for i in $(seq 1 1200); do grep -Fq \"EOF\" /opt/azure/containers/provision.sh && break; if [ $i -eq 1200 ]; then exit 100; else sleep 1; fi; done; ', variables('provisionScriptParametersCommon'),' USER_ASSIGNED_IDENTITY_ID=',' ',' IS_VHD=true GPU_NODE=false SGX_NODE=false AUDITD_ENABLED=false /usr/bin/nohup /bin/bash -c \"/bin/bash /opt/azure/containers/provision.sh >> /var/log/azure/cluster-provision.log 2>&1\"')]"
+                  },
+                  "publisher": "Microsoft.Azure.Extensions",
+                  "settings": {},
+                  "type": "CustomScript",
+                  "typeHandlerVersion": "2.0"
+                }
+              },
+              {
+                "name": "[concat(variables('agentpool1VMNamePrefix'), '-computeAksLinuxBilling')]",
+                "properties": {
+                  "autoUpgradeMinorVersion": true,
+                  "publisher": "Microsoft.AKS",
+                  "settings": {},
+                  "type": "Compute.AKS-Engine.Linux.Billing",
+                  "typeHandlerVersion": "1.0"
+                }
+              }
+            ]
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "[variables('agentpool1VMNamePrefix')]",
+                "properties": {
+                  "enableAcceleratedNetworking": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "ipconfig1",
+                      "properties": {
+                        "loadBalancerBackendAddressPools": [
+                          {
+                            "id": "[concat(variables('agentLbID'), '/backendAddressPools/', variables('agentLbBackendPoolName'))]"
+                          }
+                        ],
+                        "primary": true,
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig2",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig3",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig4",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig5",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig6",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig7",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig8",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig9",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig10",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig11",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig12",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig13",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig14",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig15",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig16",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig17",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig18",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig19",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig20",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig21",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig22",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig23",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig24",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig25",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig26",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig27",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig28",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig29",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig30",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    },
+                    {
+                      "name": "ipconfig31",
+                      "properties": {
+                        "subnet": {
+                          "id": "[variables('agentpool1VnetSubnetID')]"
+                        }
+                      }
+                    }
+                  ],
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "osProfile": {
+            "adminUsername": "[parameters('linuxAdminUsername')]",
+            "computerNamePrefix": "[variables('agentpool1VMNamePrefix')]",
+            "customData": "[base64(concat('#cloud-config\n\nwrite_files:\n- path: /opt/azure/needs_azure.json\n  permissions: \"0644\"\n  owner: root\n  content: |\n    #EOF\n\n\n- path: /opt/azure/containers/provision_source.sh\n  permissions: \"0744\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').provisionSource,'\n\n- path: /opt/azure/containers/provision.sh\n  permissions: \"0744\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').provisionScript,'\n\n- path: /opt/azure/containers/provision_installs.sh\n  permissions: \"0744\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').provisionInstalls,'\n\n- path: /opt/azure/containers/provision_configs.sh\n  permissions: \"0744\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').provisionConfigs,'\n\n- path: /etc/systemd/system/kubelet-monitor.service\n  permissions: \"0644\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').kubeletMonitorSystemdService,'\n- path: /usr/local/bin/health-monitor.sh\n  permissions: \"0544\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').healthMonitorScript,'\n\n- path: /etc/systemd/system/kubelet.service\n  permissions: \"0644\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').kubeletSystemdService,'\n- path: /etc/systemd/system/docker-monitor.service\n  permissions: \"0644\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').dockerMonitorSystemdService,'\n\n- path: /etc/apt/apt.conf.d/99periodic\n  permissions: \"0644\"\n  owner: root\n  content: |\n    APT::Periodic::Update-Package-Lists \"0\";\n    APT::Periodic::Download-Upgradeable-Packages \"0\";\n    APT::Periodic::AutocleanInterval \"0\";\n    APT::Periodic::Unattended-Upgrade \"0\";\n\n- path: /etc/systemd/system/docker.service.d/exec_start.conf\n  permissions: \"0644\"\n  owner: root\n  content: |\n    [Service]\n    Restart=always\n    ExecStart=\n    ExecStart=/usr/bin/dockerd -H fd:// --storage-driver=overlay2 --bip=',parameters('dockerBridgeCidr'),'\n    ExecStartPost=/sbin/iptables -P FORWARD ACCEPT\n    #EOF\n\n- path: /etc/docker/daemon.json\n  permissions: \"0644\"\n  owner: root\n  content: |\n    {\n        \"live-restore\": true,\n        \"log-driver\": \"json-file\",\n        \"log-opts\": {\n            \"max-size\": \"50m\",\n            \"max-file\": \"5\"\n        }\n    }\n\n\n\n- path: /etc/sysctl.d/11-aks-engine.conf\n  permissions: \"0644\"\n  owner: root\n  content: |\n    net.core.message_burst = 80\n    net.core.message_cost = 40\n    net.core.somaxconn = 16384\n    net.ipv4.neigh.default.gc_thresh1 = 4096\n    net.ipv4.neigh.default.gc_thresh2 = 8192\n    net.ipv4.neigh.default.gc_thresh3 = 16384\n    net.ipv4.tcp_max_syn_backlog = 16384\n    net.ipv4.tcp_retries2 = 8\n    #EOF\n\n- path: /etc/kubernetes/certs/ca.crt\n  permissions: \"0644\"\n  encoding: base64\n  owner: root\n  content: |\n    ',parameters('caCertificate'),'\n\n- path: /etc/kubernetes/certs/client.crt\n  permissions: \"0644\"\n  encoding: base64\n  owner: root\n  content: |\n    ',parameters('clientCertificate'),'\n\n- path: /var/lib/kubelet/kubeconfig\n  permissions: \"0644\"\n  owner: root\n  content: |\n    apiVersion: v1\n    kind: Config\n    clusters:\n    - name: localcluster\n      cluster:\n        certificate-authority: /etc/kubernetes/certs/ca.crt\n        server: https://',variables('kubernetesAPIServerIP'),':443\n    users:\n    - name: client\n      user:\n        client-certificate: /etc/kubernetes/certs/client.crt\n        client-key: /etc/kubernetes/certs/client.key\n    contexts:\n    - context:\n        cluster: localcluster\n        user: client\n      name: localclustercontext\n    current-context: localclustercontext\n    #EOF\n\n- path: /etc/default/kubelet\n  permissions: \"0644\"\n  owner: root\n  content: |\n    KUBELET_CONFIG=--address=0.0.0.0 --anonymous-auth=false --authentication-token-webhook=true --authorization-mode=Webhook --azure-container-registry-config=/etc/kubernetes/azure.json --cgroups-per-qos=true --client-ca-file=/etc/kubernetes/certs/ca.crt --cloud-config=/etc/kubernetes/azure.json --cloud-provider=azure --cluster-dns=10.0.0.10 --cluster-domain=cluster.local --enforce-node-allocatable=pods --event-qps=0 --eviction-hard=memory.available<750Mi,nodefs.available<10%,nodefs.inodesFree<5% --feature-gates=ExecProbeTimeout=true,RotateKubeletServerCertificate=true --healthz-port=10248 --image-gc-high-threshold=85 --image-gc-low-threshold=80 --image-pull-progress-deadline=30m --keep-terminated-pod-volumes=false --kubeconfig=/var/lib/kubelet/kubeconfig --max-pods=30 --network-plugin=cni --node-status-update-frequency=10s --non-masquerade-cidr=0.0.0.0/0 --pod-infra-container-image=mcr.microsoft.com/oss/kubernetes/pause:3.4.1 --pod-manifest-path=/etc/kubernetes/manifests --pod-max-pids=-1 --protect-kernel-defaults=true --read-only-port=0 --resolv-conf=/run/systemd/resolve/resolv.conf --rotate-certificates=true --streaming-connection-idle-timeout=4h --tls-cert-file=/etc/kubernetes/certs/kubeletserver.crt --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256 --tls-private-key-file=/etc/kubernetes/certs/kubeletserver.key --v=2 --volume-plugin-dir=/etc/kubernetes/volumeplugins \n    KUBELET_NODE_LABELS=kubernetes.azure.com/role=agent,agentpool=agentpool1,storageprofile=managed,storagetier=Standard_LRS,kubernetes.azure.com/cluster=',variables('labelResourceGroup'),'\n    #EOF\n\n- path: /opt/azure/containers/kubelet.sh\n  permissions: \"0755\"\n  owner: root\n  content: |\n    #!/bin/bash\n    MOUNT_DIR=/var/lib/kubelet\n    mkdir -p $MOUNT_DIR /var/lib/cni\n    if ! [[ $(findmnt -rno SOURCE,TARGET ${MOUNT_DIR}) ]]; then\n      mount --bind $MOUNT_DIR $MOUNT_DIR\n    fi\n    mount --make-shared $MOUNT_DIR\n    ifconfig eth0 mtu 1500 up\n    iptables -I FORWARD -d 168.63.129.16 -p tcp --dport 80 -j DROP\n    #EOF\nruncmd:\n- set -x\n- source /opt/azure/containers/provision_source.sh\n- aptmarkWALinuxAgent hold\n'))]",
+            "linuxConfiguration": {
+              "disablePasswordAuthentication": true,
+              "ssh": {
+                "publicKeys": [
+                  {
+                    "keyData": "[parameters('sshRSAPublicKey')]",
+                    "path": "[variables('sshKeyPath')]"
+                  }
+                ]
+              }
+            }
+          },
+          "storageProfile": {
+            "dataDisks": null,
+            "imageReference": {
+              "offer": "[variables('agentpool1osImageOffer')]",
+              "publisher": "[variables('agentpool1osImagePublisher')]",
+              "sku": "[variables('agentpool1osImageSKU')]",
+              "version": "[variables('agentpool1osImageVersion')]"
+            },
+            "osDisk": {
+              "caching": "ReadWrite",
+              "createOption": "FromImage"
+            }
+          }
+        }
+      },
+      "sku": {
+        "capacity": 1,
+        "name": "[variables('agentpool1VMSize')]",
+        "tier": "Standard"
+      },
+      "tags": {
+        "aksEngineVersion": "[parameters('aksEngineVersion')]",
+        "creationSource": "[concat(parameters('generatorCode'), '-', variables('agentpool1VMNamePrefix'))]",
+        "orchestrator": "[variables('orchestratorNameVersionTag')]",
+        "poolName": "agentpool1",
+        "resourceNameSuffix": "[parameters('nameSuffix')]"
+      },
+      "type": "Microsoft.Compute/virtualMachineScaleSets"
+    },
+    {
+      "apiVersion": "[variables('apiVersionCompute')]",
+      "location": "[variables('location')]",
+      "name": "[variables('masterAvailabilitySet')]",
+      "properties": {
+        "platformFaultDomainCount": "[if(contains(split('canadacentral,centralus,eastus,eastus2,northcentralus,northeurope,southcentralus,westeurope,westus',','),variables('location')),3,if(equals('centraluseuap',variables('location')),1,2))]",
+        "platformUpdateDomainCount": 3
+      },
+      "sku": {
+        "name": "Aligned"
+      },
+      "tags": null,
+      "type": "Microsoft.Compute/availabilitySets"
+    },
+    {
+      "apiVersion": "[variables('apiVersionNetwork')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkSecurityGroups/', variables('nsgName'))]"
+      ],
+      "location": "[variables('location')]",
+      "name": "[variables('virtualNetworkName')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('vnetCidr')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('subnetName')]",
+            "properties": {
+              "addressPrefix": "[parameters('masterSubnet')]",
+              "networkSecurityGroup": {
+                "id": "[variables('nsgID')]"
+              }
+            }
+          }
+        ]
+      },
+      "tags": null,
+      "type": "Microsoft.Network/virtualNetworks"
+    },
+    {
+      "apiVersion": "[variables('apiVersionNetwork')]",
+      "location": "[variables('location')]",
+      "name": "[variables('nsgName')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "allow_ssh",
+            "properties": {
+              "access": "Allow",
+              "description": "Allow SSH traffic to master",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "22-22",
+              "direction": "Inbound",
+              "priority": 101,
+              "protocol": "Tcp",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*"
+            }
+          },
+          {
+            "name": "allow_kube_tls",
+            "properties": {
+              "access": "Allow",
+              "description": "Allow kube-apiserver (tls) traffic to master",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "443-443",
+              "direction": "Inbound",
+              "priority": 100,
+              "protocol": "Tcp",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*"
+            }
+          }
+        ]
+      },
+      "tags": null,
+      "type": "Microsoft.Network/networkSecurityGroups"
+    },
+    {
+      "apiVersion": "[variables('apiVersionNetwork')]",
+      "copy": {
+        "count": "[sub(variables('masterCount'), variables('masterOffset'))]",
+        "name": "nicLoopNode"
+      },
+      "dependsOn": [
+        "[variables('vnetID')]",
+        "[variables('masterLbName')]"
+      ],
+      "location": "[variables('location')]",
+      "name": "[concat(variables('masterVMNamePrefix'), 'nic-', copyIndex(variables('masterOffset')))]",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[concat(variables('masterLbID'), '/backendAddressPools/', variables('masterLbBackendPoolName'))]"
+                }
+              ],
+              "loadBalancerInboundNatRules": [
+                {
+                  "id": "[concat(variables('masterLbID'),'/inboundNatRules/SSH-',variables('masterVMNamePrefix'),copyIndex(variables('masterOffset')))]"
+                }
+              ],
+              "primary": true,
+              "privateIPAddress": "[variables('masterPrivateIpAddrs')[copyIndex(variables('masterOffset'))]]",
+              "privateIPAllocationMethod": "Static",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig2",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig3",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig4",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig5",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig6",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig7",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig8",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig9",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig10",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig11",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig12",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig13",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig14",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig15",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig16",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig17",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig18",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig19",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig20",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig21",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig22",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig23",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig24",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig25",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig26",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig27",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig28",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig29",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig30",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          },
+          {
+            "name": "ipconfig31",
+            "properties": {
+              "primary": false,
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('vnetSubnetID')]"
+              }
+            }
+          }
+        ]
+      },
+      "tags": null,
+      "type": "Microsoft.Network/networkInterfaces"
+    },
+    {
+      "apiVersion": "[variables('apiVersionNetwork')]",
+      "location": "[variables('location')]",
+      "name": "[variables('masterPublicIPAddressName')]",
+      "properties": {
+        "dnsSettings": {
+          "domainNameLabel": "[variables('masterFqdnPrefix')]"
+        },
+        "publicIPAllocationMethod": "Static"
+      },
+      "sku": {
+        "name": "[variables('loadBalancerSku')]"
+      },
+      "tags": null,
+      "type": "Microsoft.Network/publicIPAddresses"
+    },
+    {
+      "apiVersion": "[variables('apiVersionNetwork')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('masterPublicIPAddressName'))]"
+      ],
+      "location": "[variables('location')]",
+      "name": "[variables('masterLbName')]",
+      "properties": {
+        "backendAddressPools": [
+          {
+            "name": "[variables('masterLbBackendPoolName')]"
+          }
+        ],
+        "frontendIPConfigurations": [
+          {
+            "name": "[variables('masterLbIPConfigName')]",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIpAddresses',variables('masterPublicIPAddressName'))]"
+              }
+            }
+          }
+        ],
+        "inboundNatRules": [
+          {
+            "name": "[concat('SSH-', variables('masterVMNamePrefix'), 0)]",
+            "properties": {
+              "backendPort": 22,
+              "enableFloatingIP": false,
+              "frontendIPConfiguration": {
+                "id": "[variables('masterLbIPConfigID')]"
+              },
+              "frontendPort": 22,
+              "protocol": "Tcp"
+            }
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "name": "LBRuleHTTPS",
+            "properties": {
+              "backendAddressPool": {
+                "id": "[concat(variables('masterLbID'), '/backendAddressPools/', variables('masterLbBackendPoolName'))]"
+              },
+              "backendPort": 443,
+              "enableFloatingIP": false,
+              "frontendIPConfiguration": {
+                "id": "[variables('masterLbIPConfigID')]"
+              },
+              "frontendPort": 443,
+              "idleTimeoutInMinutes": 5,
+              "loadDistribution": "Default",
+              "probe": {
+                "id": "[concat(variables('masterLbID'),'/probes/tcpHTTPSProbe')]"
+              },
+              "protocol": "Tcp"
+            }
+          },
+          {
+            "name": "LBRuleUDP",
+            "properties": {
+              "backendAddressPool": {
+                "id": "[concat(variables('masterLbID'), '/backendAddressPools/', variables('masterLbBackendPoolName'))]"
+              },
+              "backendPort": 1123,
+              "enableFloatingIP": false,
+              "frontendIPConfiguration": {
+                "id": "[variables('masterLbIPConfigID')]"
+              },
+              "frontendPort": 1123,
+              "idleTimeoutInMinutes": 5,
+              "loadDistribution": "Default",
+              "probe": {
+                "id": "[concat(variables('masterLbID'),'/probes/tcpHTTPSProbe')]"
+              },
+              "protocol": "Udp"
+            }
+          }
+        ],
+        "probes": [
+          {
+            "name": "tcpHTTPSProbe",
+            "properties": {
+              "intervalInSeconds": 5,
+              "numberOfProbes": 2,
+              "port": 443,
+              "protocol": "Tcp"
+            }
+          }
+        ]
+      },
+      "sku": {
+        "name": "[variables('loadBalancerSku')]"
+      },
+      "tags": null,
+      "type": "Microsoft.Network/loadBalancers"
+    },
+    {
+      "apiVersion": "[variables('apiVersionCompute')]",
+      "copy": {
+        "count": "[sub(variables('masterCount'), variables('masterOffset'))]",
+        "name": "vmLoopNode"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/', variables('masterVMNamePrefix'), 'nic-', copyIndex(variables('masterOffset')))]",
+        "[concat('Microsoft.Compute/availabilitySets/',variables('masterAvailabilitySet'))]"
+      ],
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "[variables('location')]",
+      "name": "[concat(variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')))]",
+      "properties": {
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('masterAvailabilitySet'))]"
+        },
+        "hardwareProfile": {
+          "vmSize": "Standard_D2_v2"
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('masterVMNamePrefix'),'nic-', copyIndex(variables('masterOffset'))))]"
+            }
+          ]
+        },
+        "osProfile": {
+          "adminUsername": "[parameters('linuxAdminUsername')]",
+          "computerName": "[concat(variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')))]",
+          "customData": "[base64(concat('#cloud-config\n\nwrite_files:\n- path: /opt/azure/containers/provision_source.sh\n  permissions: \"0744\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').provisionSource,'\n\n- path: /opt/azure/containers/provision.sh\n  permissions: \"0744\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').provisionScript,'\n\n- path: /opt/azure/containers/provision_installs.sh\n  permissions: \"0744\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').provisionInstalls,'\n\n- path: /opt/azure/containers/provision_configs.sh\n  permissions: \"0744\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').provisionConfigs,'\n\n\n- path: /usr/local/bin/health-monitor.sh\n  permissions: \"0544\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').healthMonitorScript,'\n- path: /etc/systemd/system/kubelet-monitor.service\n  permissions: \"0644\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').kubeletMonitorSystemdService,'\n\n- path: /etc/systemd/system/etcd-monitor.service\n  permissions: \"0644\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').etcdMonitorSystemdService,'\n\n- path: /etc/systemd/system/kubelet.service\n  permissions: \"0644\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').kubeletSystemdService,'\n- path: /etc/systemd/system/docker-monitor.service\n  permissions: \"0644\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').dockerMonitorSystemdService,'\n\n\n\n- path: /etc/apt/apt.conf.d/99periodic\n  permissions: \"0644\"\n  owner: root\n  content: |\n    APT::Periodic::Update-Package-Lists \"0\";\n    APT::Periodic::Download-Upgradeable-Packages \"0\";\n    APT::Periodic::AutocleanInterval \"0\";\n    APT::Periodic::Unattended-Upgrade \"0\";\n\n- path: /etc/systemd/system/docker.service.d/exec_start.conf\n  permissions: \"0644\"\n  owner: root\n  content: |\n    [Service]\n    Restart=always\n    ExecStart=\n    ExecStart=/usr/bin/dockerd -H fd:// --storage-driver=overlay2 --bip=',parameters('dockerBridgeCidr'),'\n    ExecStartPost=/sbin/iptables -P FORWARD ACCEPT\n    #EOF\n\n- path: /etc/docker/daemon.json\n  permissions: \"0644\"\n  owner: root\n  content: |\n    {\n        \"live-restore\": true,\n        \"log-driver\": \"json-file\",\n        \"log-opts\": {\n            \"max-size\": \"50m\",\n            \"max-file\": \"5\"\n        }\n    }\n\n\n\n- path: /etc/sysctl.d/11-aks-engine.conf\n  permissions: \"0644\"\n  owner: root\n  content: |\n    net.core.message_burst = 80\n    net.core.message_cost = 40\n    net.core.somaxconn = 16384\n    net.ipv4.neigh.default.gc_thresh1 = 4096\n    net.ipv4.neigh.default.gc_thresh2 = 8192\n    net.ipv4.neigh.default.gc_thresh3 = 16384\n    net.ipv4.tcp_max_syn_backlog = 16384\n    net.ipv4.tcp_retries2 = 8\n    #EOF\n\n- path: /etc/kubernetes/certs/ca.crt\n  permissions: \"0644\"\n  encoding: base64\n  owner: root\n  content: |\n    ',parameters('caCertificate'),'\n\n- path: /etc/kubernetes/certs/client.crt\n  permissions: \"0644\"\n  encoding: \"base64\"\n  owner: \"root\"\n  content: |\n    ',parameters('clientCertificate'),'\n\n- path: /var/lib/kubelet/kubeconfig\n  permissions: \"0644\"\n  owner: root\n  content: |\n    apiVersion: v1\n    kind: Config\n    clusters:\n    - name: localcluster\n      cluster:\n        certificate-authority: /etc/kubernetes/certs/ca.crt\n      \n        server: ',concat('https://', variables('masterPrivateIpAddrs')[copyIndex(variables('masterOffset'))], ':443'),'\n      \n    users:\n    - name: client\n      user:\n        client-certificate: /etc/kubernetes/certs/client.crt\n        client-key: /etc/kubernetes/certs/client.key\n    contexts:\n    - context:\n        cluster: localcluster\n        user: client\n      name: localclustercontext\n    current-context: localclustercontext\n    #EOF\n\n- path: /etc/kubernetes/manifests/kube-addon-manager.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/5STyW7bQAyG73oKIj3LalDk0LmlWVqjsC2gy7WgR7RDeBZ1hlKgty80srwEiZyepOGQH3/+lLDm3xQie6egvc527CoFpa8yS4IVCqoMwKElBbtmTTlWlXe5RYdbCvurWKMe72MXhWwG0J5QAQyuycSeBYB1/Sos1qT7jDqwDyzdncEYl6n1QM2dryjXgYU1mgzgyUdZkjz7sFMgoaEMQHsnyI5C6pZPaQdgi1tSYHWYWdbBR7+Rmfa28DEWfU1wJDS8nper9vPsevbpSCkbY0pvWHcK5pullzJQJCcpg1w7zD7q+f7ry8Pdavk4/5rCAC2ahhRcFS2GwvA6tTQk6am92/D26oxwe3+/Wv4pb39+e0kg0afak+xYsGMZCIGib4Km/Tr6wN+GohzOALpuFNzYw9mS9aFTcPNxwSnYetNYWvjGjWWjrqHdvtL2CSXKk4IJWQcZWK2c6Q6rPEJt5FeIo1XPiFtyUizSaqp5RU5YuvwHibDbxsv8FkNueJ3vTZ/odZ4xgSTR+XHci368BRyMPvuWTxzuf4CE25fX77D6padvMP7D3CkXL9CPqRO+vWvK7MPD6jH7FwAA//+80EWUzwQAAA==\n\n- path: /etc/kubernetes/manifests/kube-apiserver.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/6RWbW/bNhD+7l8hdF9NK3b6NmMa4LpeUyBNvbhrNwyDcSbPMmeKp5EnN86vHyhZtvyaYGuBIOE9z3PHe6EOcv0Vnddk+9Gq21pqq/rRmFQrQwYFDP1WFFnIsB8tixkKyLVHt0K3OfY5yNrm154xa0WRgRkaH5hRxBpdP5Jk2ZERuQGL5bmkLCeLlo+EfY4ycHOnyWleDw14f1eGUHkQlhQK6TRrCaYVRQvyfIf8ndyyH7ErgofgEbRFt4lDnLtF+KczSLEfZdJ1Mi0deZpzR1IWk/dxYDiLjNWvO3J/1e30rjrdblNlXBgzJqPluh99nN8Rjx16tLzBSMoyCDn+88W+2Iu/NghwqQ9mIUCt0LH2KEAph94nP22PBkq5n1+0owAzhr6L3OmVNpiiSkIGNiZLdp1R4QUUvEjmYHxtKZRmYSgVGTxAisn11QnDDOSyyJPuKZvXj5h0r45MOfAiiVfgYkNpmbHSFpc/O4bSJiEvMyXm2mASI8tmskEpsj5uAjtryEzN5wU5/QisyYqMFCZ3pLB9/24wrBAzbdU2c1ed8n9lkUajZSHhtGOJjn0soSMd1wQqlJBk5zo9jvOxcNj525NtgnNHK63QJaW5sqCFmQnVzLQPIydyU6Ta+uSunqRbPUe5lgbbtzrTfA82RdeeoFtpiQMpqbDcfo9zKAxPmBykWI5HffaFDLoyJROUZJVvfwWjFbC26aB2+w1nC6Jl+x49FU7irwUxtEcPjFahqk93Uu0xqQnKIgxj1dp715kRsWcHuWBaoq1abdeDyFIJCc/MdIVGxxfwAVOV8IC3xPXzaEtcN2jVAPpkwZz7fhx3e2/Kbun2e9dvfqyA2vqQARQ5OU42fRRcGORtP4XRnGsJfPamB1EfCCxxfZm4jTt3NNdG27Q507mjh3UzmEvtXYJ3kexxl3hmJJvUbSwO/ynQ8wJBoateI1Si/DgkpxDPmr5NPI3O2BfBB3Ygqj+8yB3O9UPyu7jHjBjFqLSe4qWOirzm7QgfwvEpfOHRhascU37z6CpGszNevryuD8uZFVANrdDeF+i2Pba7cEdVo9vxK9mRpvCMrmNIgjkt9ERxth+UXYEOFQxReNV3I3oI8Dq12qb/w9XmHkLnwoU3LOluHuC4+3qDrF4vET4xaFUSJnGTOjb+yfbd+d42SEnT+QKd8IVm9MmX28l0NHx/M5reTwbTbx+/3EyHN4PhzaB3NR1/vv2je331qr0DjYbvnwPbag1Gk2m393b6YfhpOrkZ9F69Pi12Eben1nv1ukZdv315Xu0s7ii24bthQF0O7Bh0FNWTOg3QrhxhKQHG/9BIq6S33YhWZIoMP4XW3CxzzYUOWYqd4tYcRVkgjIEX/ejA7UkN703ZdZckvDfxPqZWWIETRs/qF/2MRrkV6Vl8iKpVMq+fYH4HSNFy/AkspKg+KrSseS0myOEb3wzeIajP1qy3K/G+L09yecYZ5cehlWuYofRSfM19r1XX7WD/PlmusMCXQlv1/GzdLtXsos5+8S4X7qzQqQoeV+9J+rPKeKJSZ4Xrkp0p1+WA9ur2w+jzL61/AwAA//8klceBFw4AAA==\n\n- path: /etc/kubernetes/manifests/kube-controller-manager.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/4xVTY/jNgy951cIcyxGtjPYvRjwaU8DdKcBFuil6IGRGYeNJBoU7UH66ws5TiaTj0lzCsL3Hh/1JAZ6+hMlEcfajMvFjmJbmxW3i4AKLSjUC2MiBKzNblijdRxV2HsUGyBChzLXUw/uCEr7pBgWxnhYo09ZwhgllNrMfNt7iDj97jj0HDHq/Q6pR5dFeiEW0v0PDym9TaYOrWzkFq0TUnLgF8ZsOekb6jvLrjYqQ26VhYEiymzIPpwrfyhAh7UJTopATjjxRgvHoeSUykyViIqHrzdU6nFZvFTFcnkutxq8X7Ent6/N6+aNdSWYMOqMcRwC5Bz+erqj+vT3DAXpUsZZC96zA8X5KKiV1GzAJ3x6Nk/WOs9Dm5U21DUlqjv3Dv8OgsU/ieM5uBceqUVppvKxMiRFmfSbZVW8fKuKqqjK5cvnej7ZRhCDhV2ynfDQXyASdZFiZx2K2g15vHKVK6l0UDjR29wd7h9Qd7ifqdPkg+A8nPCg+PmETqecmt+e18yaVKDPvVCelXcYnUeIKAf8BkGzXgdZ6Hd24H8pC3T4A3pwpPvXxB6UODb5Bh5Y2eQxhRGk9LSejHvU8qN2wHqEFsWiR6dnElPAgSMpi+0EHNoehbhtvlXpAOm5tTiSy82tUkAetPkeTmXhDXmK3fn8wqzWwf/NYjpAK9mwI0/TnEcfy2OjhDKSQwvO8RDV9kJjvqMPgoOeMhPlIz9FCRRBsZ2G65zVrWDasm+b71VVHVBDwqueTrDFqAQ+nR3i2LycHtHIfgj4M6Pn1XC+HlCd/XB4KhsTMmEFuq3NxRg3NVLyX5A/VwWh/SP6/Wl3fZZzMD0b2lB+8fc8DUnKvBN8mbYgWN5nXbS76jeCWE9rO1/UO/0urvOVSkj0gPkO0GHU8ue05drXKTfd21+oSrH7wvIxxIvVfjO7/N8wNT7J9XdDvB3glwpH2Ndh3ZV4lNricTB3tW8ldJ3OQ/rDmP4LAAD//7o5iMVVCAAA\n\n- path: /etc/kubernetes/manifests/kube-scheduler.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/4SSMY/bMAyF9/wKIXMVNzcKyNTphrsaKNCl6MDItENEEg2K9sH/vlDiOuklaTwZJN/j4wdBTz9RMnFyZtyujpQaZ2puVhEVGlBwK2MSRHTmOOzRZn/AZggoczn34JfelBXjypgAewy5KI1RQnHGc1LhYPsACU91z7HnhElvjHOPvmh7IRbS6VuAnN9PEc4bbOIGrRdS8hBWxhw46zvqB8vRGZWhbCgbgRLKnMM+uqJ8FKFDZ6KXTSQvnLnVjedYcc5VUUhCxfPvRezG7ebl62a7vXaphxBqDuQnZ17bd9ZaMGPSecZzjFAY/1r/a7b+PU+AdLm0rS0DnlNL3a4aQapA+1OCgFpdeusvZm1tQGhQLAb0uisIzuVeuKVAqdu1EPJcHHcvy7aRwxDxjYekM6hrWKjeXs5f2sbEIqhBD85UqL66M/TXYwSxgfZ2Tv7A5NN9Ny4x0xPlB0CHSas3SNBh89pgUtLJ/kBVSt11ekFovqcwLY/lTOHTS7l7fHlqp8WLXf+Qwv8JPHS6h+IWw1P5Ux5/AgAA//9vXGjn+wMAAA==\n\n\n\n\n\n- path: /etc/kubernetes/addons/audit-policy.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/5ySy07rQAyG93kKK8uj01bsUF6ADSAUBBvEwp2Y1GoyHsae0L49yqWlrQCJ7Oby+/fnCwZ+pqgsvgBMFdtye61LllV3lW3ZVwU8SMNun0nL9mhYkxYZwAJKek+kVpIj7qjKYmoOXw111BRfCg3ilTIAgEgqKbpR2WvrKCkUkOfD/VQAL3mQSvPXU887MqzQcKbZqpE6/w/jWQ0tXfjfix9Bk1IcwnSvRm2xTWtahCi7/RAA0FFcD4IPNLeZHv9GRL4Kwt60R1KKHTv6jeemNzuFwmQb8sYOjaoJwYsvpyRP5e0RZIWB/x3O3Tjxb4Y1owon/o3rFoMeCLAlDTh9D40bec9Lm59RyUUynW13vNPOyPed0B937Hztx+jL1f8MAAD//62kjQpEAwAA\n\n- path: /etc/kubernetes/addons/azure-cloud-provider.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/9SVT4/aPBDG7/4UFpdcXvOqtyq3dg+99J9A6mW1qib2EFwSO/KMI7GfvrLNLoWNEGgL2t4ihxk/z2+eDEopAYP9gYGsd7UMDeg5RF77YB+BrXfzzXuaW///+E5srDO1vOsiMYaF71D0yGCAoRZSdtBgR+lJyk1sMDhkzKW6VCjCMFqNtZxxiDgTUjrosZa0Jca+hscYUOnOR6OG4EdrMIgQO6RaKAmD/RR8HKiW97PZg5AyIPkYNOYTHNEx5fMRQ5N1KKkDAmN+HID1Oj/FwaTD11n/aJ2xrr0FAd/hAlep7RODE2KFlC/HdM41FJtfqDmzLh2WRewHrX10/Nxksrq8pAGSueRdlbteSfkA74SHIbUlRsdq9F3sUTXWFT2XD2MyalV1HLWKUAdkqvZZS3fI+6pFrv6rSuaqhysE7OoE9lGbCtF58btE5NmhO2Hz+sG7ynetSoxUi8wX7Lld+I4XXYv8ryy0Y+M3WW9Hl95o2RH7AC3usTfI8MR+WV7edUA08ZUbXEHskhJwznOGsBvFrq1OlfPUcn44HEtqV63yb/6YzuUTza6THQz1UUmBYyxtxAABemQMtF8eX8BBi0Y8C4YCl7cDJvvgDATz8/NiKaTUoNfWtb03WMsFgvnmuu1fBdoXOWoI2NvYvwT7dth8LxJvjoZ2M3nLbM7OzYTzk7wmuGShK1v+/K4OJF90CIQ28WtWcuD6dwAAAP//NH/WfLULAAA=\n\n- path: /etc/kubernetes/addons/calico.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    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\n\n- path: /etc/kubernetes/addons/coredns.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    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\n\n- path: /etc/kubernetes/addons/ip-masq-agent.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/8xVwW7jNhC96ysGAXqklGSxRiqghyKbQ4AkDTbY3ifU2CFMcmhyqFpFP76gZDtSdtPu9lT6Npz3Zub5UYPB/E4xGfYtYAip6S+qrfFdC5+QHPsnksqRYIeCbQXg0VEL+GeOpExQDtNO4Ya8HO5SQE0tbPMzqTQkIVcBWHwmmwocQLML7MnLeywwgqMnoVQbbrTNSSiqRLE3hftMYqazMRO7jr1DjxuK9RLmuKMWPpNmr42lMV0MxRY8d1SlQLo0lEOHQk8SUWgzTC3KEAqUrTV+82VMGONxHplSARzuv3js0Vh8ttTCx/OfKoBElrRwnLIcin65m4kAsL1KCkN4X4RFtwBCLthT2fk/Uo5dcH8X+xv+UU3vWVAM+xnVUX7Mwkmj/UrobvRJIlGBu8W/c9S4nBANRyPDtcWUHkYTTfZQpQGloxGj0R6yXzjJA8kfHLctFMJDvOQ+LaT92i+cWrDG5/1RRrYUl1Mp2NLQwvWh6K/FRek3b4cTJYeC4djCzd4kSUvg2HJkS289h0Wqb5Hs8mk2gB5tXvq4HFqvSUsLD/ykX6jLlk5FX4nOpna+hbrZk87yg6A3pTR7QeMpzqT6pxc/HeNwQy04HWtndOTEa6k1u4ZTal4Vahbotr+sP9bnS5LHbO0jW6OHFm7XDyyPkdK8FMbNzJulPaXIl5enTOhXv6zRJjrdJ9J5NB17ob3MgSGa3ljaULcwGEDPNju65+zlTaV3hVCa/dps1ASdYQBc4XlEeWmhIdHNlHlKiZQ4R02LSpF2mdKyOoAOuXxc3JKeHMehxO/N7MIaZ34IfzkjmKaYof/L5FP8HsOyiX8jqpRS1XwlnbbR9ZHw+7aROgn9P1xKNz7lSIcPy3GU5eOAv9TI5dnfY9plitjR9e2nz7OHeXFej7/m6jW0uqpXH+qLy5/ri1Xz4fKwfdLuzvjtHWu0B7dXB/cNXt96odiXm9V5qv4OAAD//6huZCIQCAAA\n\n- path: /etc/kubernetes/addons/kube-proxy.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/8xWTW/jNhC9+1cQAYo9UbKDFlgQ6KHIBsWiTRpssL2PqbFNmF9LDl0bbf97QUq2JctWUvRSHefjzbyZR1Lg1e8YonJWsN1itlW2EezB2ZVaP4GfNUAgZozJYqkOYLRgf80YY6yfuU1L9MHtD1UXuP0YK+Xq3QK038CiJLTYv6QlvuTQtkgKQMrZEiC1QksPzlqU2SiKlRX0Flewegeh1mpZZ6NGqs/ODiNFwvDw+dMXwe4W8+r++3k1r+b14v6uBBjXoGB3yhMsNcbWuEKgFPBnIIzHqn/+PTNIcJyABYMtUV6Y8lPR7Ike5NEdD5HQzBjTsETd4UHTOGvAwhpDlcOCRcIypLajL5mFVBpnR8rniI4Ujxh2Kte5o5CwbV06451FS/3miocUBsGsazrIj5GD94Mwzvmsv0fwPtYnGXwCNM6+Ig0G8f9nNV7W7S1FjzJziahRkgstLwMkN7/2iN4qNN3rRbfJN0D4SgEI14cWmA4+j8lprez6awko9tC3HHswsP9qYQdKZ+0K9sP8uxljhMbrU1R/VfnTAxbT3Y6mO00crHVUjm8fv9sqJHJRgh4Joymqikjcu2aw9PxFucEm5axyc1zkyqBISdBt6ocPJe24wvz5oFxQdHjQEONzUUG7aJ458WP+cTtOYxgS4GyLh3YCPDiNl6qGTO7UrfM53wXBHr+lEyxjO9AJR9xwtUJJgj27147lqegZ6O5xryLFa1mPe5SJ/mXSqFTh99AN4qd8gONvVh+ucSqgJ5VbAmUx9EYlnTFgm/Py+TVNcca7y/LHwe3dhtW9p+WUogysUTAjQ2WUDC66FVXSmdrFWJ830oMRu0V1P68WiyHGS9L6xWklD4J9Xj07egkY0dIp6spN0X4Bo0tBYk/a2fgtYaSBjTHpk2CL+dycVYwyFRk6S7infrgPaqc0rrERLMvjrBmnk8Enl2wfnzOTLS9AG8FqJFnHqGuJ4bSYM4sYNS8evnGRBm1Dk3d8UXGMfR7tCBxJ8qvud4G/8Wpf7mLkeleRkGy9b5/1Sju5HUEfH/2Bc4iRmzQuH5hYj1vL7HXn/i8jmJA+YzEt25Tr7hs/IrzVz1tdZWU8I/3hwnZgb7N7ZzsHljb62m2ZpBjquIGAtYQiOLVSEvqqmNDjJPI7ZHJDJJOwN6Q9IexJuJs6u6mySbirkrstON7p4gm8eFsWNy+6q7LJz97r4E+IjX7bXBRMK5v2s38CAAD//3DrTBw8DAAA\n\n- path: /etc/kubernetes/addons/metrics-server.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/+RXS28bNxC+768gfC4lu3GAYAEf0qRNDCTuwnZyp7ij1dR8dTireFP0vxfch3ZXkYw0zcNAeRHFIefxcfjNrAr4Hiiid7nYnmV36Mpc3ABtUcNzrX3tOLPAqlSs8kwIo1ZgYpoJcfcsShVCLiwwoY4yAm2BWpkqS++scqoCWtzVKyAHDHGBfml9Cbm4Bu2dRgOZEE5ZOKAlLcegNOQiaZCxiQw2k1JmU7dppfRC1bzxhB8Vo3eLu2etpV1AL0wdGejaG/j20YgHPFJVRVApBsleqtKiy8UJUw0n/+YglMhfcm6L8GFyroO9QzXfbSzlAACBKoEyqg3EPJNCBXxFvg4tYHLAqbeUCUEQfU0aennwZWwnzpeQZlugVS+rgNtfg7GbfFCsN4/+ameI7Sk7BtPJyWdA08+WkRX3/4fk7/5q79ZYWRW+GZAJwV/QleiqH/PiZfJvSLqjr5+8gWtYJ38GoB8ILxNijG5nF+4ZXAJGqoAT4+AYdXt8cCPWqz9Ac3uvB7nx+5LXD72ffGCKdE0lmMQWnr70Qqbvdp+K5gb+33dwhGy+Ouh7Br456PvNxmPrMmIAnRwInrjn2k7Bhrkl4U6Ui/PzJ90/8uy1N7m4fVG0K6yoAi7aXcOpCAY0e3o4tn2wVAhxTMaXEIxvLDy+1mwAbR6lTSXpzcS7h/yLTIqharqd5I1BV70LpWIYDlt1/86prUKjVgZycZoJwWCD2e2ZwpKGmRl/GJ4hhjS0d6zQAe3OSqGommiSQkoNxLJEuliyDTNJBF0TyJQoF+dDogzCBJwBloFgDURQSlWWBDFKbgLEi0vHQE6Zy+KnX+9309c+ckL/oKo6gkyNhEx9RB1bw7ONXbwytSOmTgxxcfY0HlSFrneezbgBrapSOmhaWNTko1/zQnu79DEux1Ra7hWO7eni6eJ0rqWojSm8Qd3k4nJ95bkgiOBGdw1uwUGMBfkVjIALsVZoaoLbDUHceFPm4slEmh7aK+DpASGC4k0ulknlx7lg9jjHEfUGUuK/vr0tbiaSAIS+vEkPpIy5OBuDOvJQRjOzpNklVtFzyPk0hn2i6ZV8QjBppEYFvzJOSWfz34BCh4zKvASjmh1cP59+FpSzZnlc/LOGyHHusA51OnpqZ6sWrKcm2Tt9iztJm8/IzQvvGO55rlyVvzvTXHvPv6GBviaK9KU03Va75/HKu7TtsPBdBGodGqPZelNbeJuK5iwFbFopOsCnvDFcP9uQSKVfT6/6ZsaqaczZ28dcGHT1fS8PhL4N2KgYrybFXuquD5CaMHW8JhsQmpb4q+MZ3cU0IUWwgZuXSLn46+/scByf1jQkqLDl+0Mt1/Pi8ju3BtuzFbA6W+x92A4Foeq6rE8+e9v1osf6LTq0tW1zIEvPoGPRmzsMt29u3gPhutmlTo93F8xRAjlSa9vPwKGXah0flwZvOjf+CQAA///90eYF5BEAAA==\n\n- path: /etc/kubernetes/addons/pod-security-policy.yaml\n  permissions: \"0644\"\n  encoding: gzip\n  owner: \"root\"\n  content: !!binary |\n    H4sIAAAAAAAA/9RVTU8jORC996+w2APSSgmLVqxWfcsGWCHxEWU0XNAcKu1K8MTt8pTthMyvH9lxN+kQUAThMEeXq55fva5XDVbdIztFphSWtKpWJ4vTCXo4LebKyFKMSH7BKrDyq1G6L2r0IMFDWQhhoMZSWFYLpXGGshACjCEPXpFxMUMIh1VFte27DNMHbR+hPw8TZIMeXV/RCWhNS5QjpqnSeAs1ulIc/XlUCKFhgjpjgZRkajAwQ95CqEliKcZYkamUxsJZrGLRM7lSeA4YKcbHRk38wlWgE+FuAsohWJgorbzC9H4vM1qQDnU39EjO36JfEs9blBgbEfucWCtTir9SGzU8leKfs7O/z3La1WjYLbs6b88czMB9dchrCTjo2GcMDsyqiPpeKxOeXrsN1mqs0XjQ/zMF615JnLp0vfO21+sVB5kURudZVf7QkyKpmiOfSJxC0H49KtYC18TPaJHsPmAcjFc1dtD2opYLNtBK8W5qO8FeUjugO6ag3dv2aDIYfwTFKM+Z7LZJ4qgPrq+7NonBisxUzW7A5jPW1q/OFeejZfqOeTLi2WHF6PNB0tIsgeVgdNWkx1l0Ho2/T88MNah624gN39Zim4HksbajXSa7Cc4nD9ySGRP5D5qthVvHwMwacdr1cJqPWytihzffD8YI8s7oVezoUml0K+exbqTYtjpPoOpD8I/E6mcag/783zRSi8b4Qx2cRx6Txl0/B2fLzg/inRMb23Zl0RNgVdZWPBzjk0cTmbrjb6k3R4ErTHeWZGOwtLAUrpMWyBNXJmEejoPDTuV6BxTriWxZf4oqnWX426iywfpjqvynjFRmtkOcvN0OIxBpHOM01jUSvUG0EOLl13vlm7kwiQsrqb8uSuhtevZVfAaNVxXkv94eLD5b2IP48bDCblD6TGHfAjQk0e0J9MfF3WXxKwAA//+Y7F5+PQsAAA==\n\n\n\n- path: /etc/default/kubelet\n  permissions: \"0644\"\n  owner: root\n  content: |\n    KUBELET_CONFIG=--address=0.0.0.0 --anonymous-auth=false --authentication-token-webhook=true --authorization-mode=Webhook --azure-container-registry-config=/etc/kubernetes/azure.json --cgroups-per-qos=true --client-ca-file=/etc/kubernetes/certs/ca.crt --cloud-config=/etc/kubernetes/azure.json --cloud-provider=azure --cluster-dns=10.0.0.10 --cluster-domain=cluster.local --enforce-node-allocatable=pods --event-qps=0 --eviction-hard=memory.available<750Mi,nodefs.available<10%,nodefs.inodesFree<5% --feature-gates=ExecProbeTimeout=true,RotateKubeletServerCertificate=true --healthz-port=10248 --image-gc-high-threshold=85 --image-gc-low-threshold=80 --image-pull-progress-deadline=30m --keep-terminated-pod-volumes=false --kubeconfig=/var/lib/kubelet/kubeconfig --max-pods=30 --network-plugin=cni --node-status-update-frequency=10s --non-masquerade-cidr=0.0.0.0/0 --pod-infra-container-image=mcr.microsoft.com/oss/kubernetes/pause:3.4.1 --pod-manifest-path=/etc/kubernetes/manifests --pod-max-pids=-1 --protect-kernel-defaults=true --read-only-port=0 --register-with-taints=node-role.kubernetes.io/master=true:NoSchedule --resolv-conf=/run/systemd/resolve/resolv.conf --rotate-certificates=true --streaming-connection-idle-timeout=4h --tls-cert-file=/etc/kubernetes/certs/kubeletserver.crt --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256 --tls-private-key-file=/etc/kubernetes/certs/kubeletserver.key --v=2 --volume-plugin-dir=/etc/kubernetes/volumeplugins \n    KUBELET_NODE_LABELS=kubernetes.azure.com/role=master,node.kubernetes.io/exclude-from-external-load-balancers=true,node.kubernetes.io/exclude-disruption=true,kubernetes.azure.com/cluster=',variables('labelResourceGroup'),'\n    #EOF\n\n- path: /opt/azure/containers/kubelet.sh\n  permissions: \"0755\"\n  owner: root\n  content: |\n    #!/bin/bash\n    set -e\n    MOUNT_DIR=/var/lib/kubelet\n    mkdir -p $MOUNT_DIR /var/lib/cni\n    if ! [[ $(findmnt -rno SOURCE,TARGET ${MOUNT_DIR}) ]]; then\n      mount --bind $MOUNT_DIR $MOUNT_DIR\n    fi\n    mount --make-shared $MOUNT_DIR\n    ifconfig eth0 mtu 1500 up\n    iptables -I FORWARD -d 168.63.129.16 -p tcp --dport 80 -j DROP\n    #EOF\n- path: /etc/systemd/system/etcd.service\n  permissions: \"0644\"\n  encoding: gzip\n  owner: root\n  content: !!binary |\n    ',variables('cloudInitFiles').etcdSystemdService,'\n\n- path: /opt/azure/containers/setup-etcd.sh\n  permissions: \"0744\"\n  owner: root\n  content: |\n    #!/bin/bash\n    set -x\n    if [[ ! -s /etc/environment ]]; then\n        echo \"\" >> /etc/environment\n    fi\n    sudo sed -i \"1iETCDCTL_ENDPOINTS=https://127.0.0.1:2379\" /etc/environment\n    sudo sed -i \"1iETCDCTL_CA_FILE=',variables('etcdCaFilepath'),'\" /etc/environment\n    sudo sed -i \"1iETCDCTL_KEY_FILE=',variables('etcdClientKeyFilepath'),'\" /etc/environment\n    sudo sed -i \"1iETCDCTL_CERT_FILE=',variables('etcdClientCertFilepath'),'\" /etc/environment\n    sudo sed -i \"/^DAEMON_ARGS=/d\" /etc/default/etcd\n    /bin/echo DAEMON_ARGS=--name \"',variables('masterVMNames')[copyIndex(variables('masterOffset'))],'\" --peer-client-cert-auth --peer-trusted-ca-file=',variables('etcdCaFilepath'),' --peer-cert-file=',variables('etcdPeerCertFilepath')[copyIndex(variables('masterOffset'))],' --peer-key-file=',variables('etcdPeerKeyFilepath')[copyIndex(variables('masterOffset'))],' --initial-advertise-peer-urls \"',variables('masterEtcdPeerURLs')[copyIndex(variables('masterOffset'))],'\" --listen-peer-urls \"',variables('masterEtcdPeerURLs')[copyIndex(variables('masterOffset'))],'\" --client-cert-auth --trusted-ca-file=',variables('etcdCaFilepath'),' --cert-file=',variables('etcdServerCertFilepath'),' --key-file=',variables('etcdServerKeyFilepath'),' --advertise-client-urls \"',variables('masterEtcdClientURLs')[copyIndex(variables('masterOffset'))],'\" --listen-client-urls \"',concat(variables('masterEtcdClientURLs')[copyIndex(variables('masterOffset'))], ',https://127.0.0.1:', variables('masterEtcdClientPort')),'\" --initial-cluster-token \"k8s-etcd-cluster\" --initial-cluster ',variables('masterEtcdClusterStates')[div(variables('masterCount'), 2)],' --data-dir \"/var/lib/etcddisk\" --initial-cluster-state \"new\" --listen-metrics-urls \"',variables('masterEtcdMetricURLs')[copyIndex(variables('masterOffset'))],'\" --quota-backend-bytes=2147483648 | tee -a /etc/default/etcd\n  \n\n    #EOF\n\ndisk_setup:\n  /dev/disk/azure/scsi1/lun0:\n    table_type: gpt\n    layout: true\n    overwrite: false\nfs_setup:\n  - label: etcd_disk\n    filesystem: ext4\n    device: /dev/disk/azure/scsi1/lun0\n    extra_opts:\n      - -E\n      - lazy_itable_init=1,lazy_journal_init=1\n  - label: ephemeral0\n    filesystem: ext4\n    device: ephemeral0.1\n    replace_fs: ntfs\nmounts:\n  - - LABEL=etcd_disk\n    - /var/lib/etcddisk\nruncmd:\n- set -x\n- source /opt/azure/containers/provision_source.sh\n- aptmarkWALinuxAgent hold\n'))]",
+          "linuxConfiguration": {
+            "disablePasswordAuthentication": true,
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "[parameters('sshRSAPublicKey')]",
+                  "path": "[variables('sshKeyPath')]"
+                }
+              ]
+            }
+          }
+        },
+        "storageProfile": {
+          "dataDisks": [
+            {
+              "createOption": "Empty",
+              "diskSizeGB": 256,
+              "lun": 0,
+              "name": "[concat(variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')),'-etcddisk')]"
+            }
+          ],
+          "imageReference": {
+            "offer": "[parameters('osImageOffer')]",
+            "publisher": "[parameters('osImagePublisher')]",
+            "sku": "[parameters('osImageSku')]",
+            "version": "[parameters('osImageVersion')]"
+          },
+          "osDisk": {
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        }
+      },
+      "tags": {
+        "aksEngineVersion": "[parameters('aksEngineVersion')]",
+        "creationSource": "[concat(parameters('generatorCode'), '-', variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')))]",
+        "orchestrator": "[variables('orchestratorNameVersionTag')]",
+        "poolName": "master",
+        "resourceNameSuffix": "[parameters('nameSuffix')]"
+      },
+      "type": "Microsoft.Compute/virtualMachines"
+    },
+    {
+      "apiVersion": "[variables('apiVersionAuthorizationSystem')]",
+      "copy": {
+        "count": "[sub(variables('masterCount'), variables('masterOffset'))]",
+        "name": "vmLoopNode"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')))]"
+      ],
+      "name": "[guid(concat('Microsoft.Compute/virtualMachines/', variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')), 'vmidentity'))]",
+      "properties": {
+        "principalId": "[reference(concat('Microsoft.Compute/virtualMachines/', variables('masterVMNamePrefix'), copyIndex(variables('masterOffset'))), '2017-03-30', 'Full').identity.principalId]",
+        "principalType": "ServicePrincipal",
+        "roleDefinitionId": "[variables('contributorRoleDefinitionId')]"
+      },
+      "type": "Microsoft.Authorization/roleAssignments"
+    },
+    {
+      "apiVersion": "[variables('apiVersionCompute')]",
+      "copy": {
+        "count": "[sub(variables('masterCount'), variables('masterOffset'))]",
+        "name": "vmLoopNode"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')))]"
+      ],
+      "location": "[variables('location')]",
+      "name": "[concat(variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')),'/cse', '-master-', copyIndex(variables('masterOffset')))]",
+      "properties": {
+        "autoUpgradeMinorVersion": true,
+        "protectedSettings": {
+          "commandToExecute": "[concat('echo $(date),$(hostname); for i in $(seq 1 1200); do grep -Fq \"EOF\" /opt/azure/containers/provision.sh && break; if [ $i -eq 1200 ]; then exit 100; else sleep 1; fi; done; ', variables('provisionScriptParametersCommon'),' USER_ASSIGNED_IDENTITY_ID=',' ',variables('provisionScriptParametersMaster'), ' IS_VHD=true /usr/bin/nohup /bin/bash -c \"/bin/bash /opt/azure/containers/provision.sh >> /var/log/azure/cluster-provision.log 2>&1\"')]"
+        },
+        "publisher": "Microsoft.Azure.Extensions",
+        "settings": {},
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.0"
+      },
+      "tags": {},
+      "type": "Microsoft.Compute/virtualMachines/extensions"
+    },
+    {
+      "apiVersion": "[variables('apiVersionCompute')]",
+      "copy": {
+        "count": "[sub(variables('masterCount'), variables('masterOffset'))]",
+        "name": "vmLoopNode"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')))]"
+      ],
+      "location": "[variables('location')]",
+      "name": "[concat(variables('masterVMNamePrefix'), copyIndex(variables('masterOffset')), '/computeAksLinuxBilling')]",
+      "properties": {
+        "autoUpgradeMinorVersion": true,
+        "publisher": "Microsoft.AKS",
+        "settings": {},
+        "type": "Compute.AKS-Engine.Linux.Billing",
+        "typeHandlerVersion": "1.0"
+      },
+      "tags": {},
+      "type": "Microsoft.Compute/virtualMachines/extensions"
+    }
+  ],
+  "outputs": {
+    "masterFQDN": {
+      "type": "string",
+      "value": "[reference(concat('Microsoft.Network/publicIPAddresses/', variables('masterPublicIPAddressName'))).dnsSettings.fqdn]"
+    },
+    "primaryAvailabilitySetName": {
+      "type": "string",
+      "value": "[variables('primaryAvailabilitySetName')]"
+    },
+    "primaryScaleSetName": {
+      "type": "string",
+      "value": "[variables('primaryScaleSetName')]"
+    },
+    "resourceGroup": {
+      "type": "string",
+      "value": "[variables('resourceGroup')]"
+    },
+    "routeTableName": {
+      "type": "string",
+      "value": "[variables('routeTableName')]"
+    },
+    "securityGroupName": {
+      "type": "string",
+      "value": "[variables('nsgName')]"
+    },
+    "subnetName": {
+      "type": "string",
+      "value": "[variables('subnetName')]"
+    },
+    "virtualNetworkName": {
+      "type": "string",
+      "value": "[variables('virtualNetworkName')]"
+    },
+    "vnetResourceGroup": {
+      "type": "string",
+      "value": "[variables('virtualNetworkResourceGroupName')]"
+    }
+  }
+}
